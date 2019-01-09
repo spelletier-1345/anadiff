@@ -252,26 +252,6 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
 
 
 
-.creationFileOut <- function(dirName, swap, dataTest) {
-  # Cree le fichier out dans le dossier dirName
-  # Export les infos relatives a la date et au dossier de travail
-  # Args:
-  #   dirName : dossier d'export pour .writeLineOut
-  # Returns:
-  #   rien
-  if (dataTest == TRUE) {
-    fileOut <- paste(dirName, "qualityControl_geoSubmission/AnaDiff_", swap, "_out.txt", sep="")
-  } else {
-    fileOut <- paste(dirName, "qualityControl_geoSubmission/AnaDiff_", swap, "_", Sys.Date(), "_out.txt", sep="")
-  }
-  file.create(fileOut)
-  .writeLineOut("\n###  Analyses microarrays ###\n", fileOut)
-  .writeLineOut(paste("Le",format(Sys.Date(), "%a %d %b %Y")), fileOut)
-  .writeLineOut(paste("Repertoire de travail :",getwd()), fileOut)
-  .writeLineOut(paste("Dossier d'export :      ",getwd(),"/",dirName,sep=""), fileOut)
-  return(fileOut)
-}
-
 .defineArrays <- function(dirName, fileOut, fileArray) {
   # Ouverture et modif du fichier arrays.txt
   # Args:
@@ -1372,20 +1352,3 @@ singleTiffCompilation <- function() {
 }
 
 
-.writeLineOut <- function(lineOut, fileOut) { #valide
-  # Ecrit une ligne dans le fichier out
-  # Args:
-  #   lineOut : texte a ecrire
-  #   dirName : dossier d'export pour .writeLineOut
-  # Dependance:
-  #   .nameFileOut(dirName)
-  # Returns:
-  #   rien
-  if (fileOut=="noOut") {
-    cat(paste(lineOut, "\n", sep=""))
-  } else {
-    cat(paste(lineOut, "\n", sep=""))
-    write.table(lineOut, fileOut, quote=F, append=T, row.names=F, col.names=F)
-  }
-  return(NULL)
-}

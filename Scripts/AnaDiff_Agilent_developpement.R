@@ -22,6 +22,8 @@ source("./src/selectionDossier.R")
 # Créer un nouveau fichier et le renseigner dans le source suivant
 source("./src/designVersion.R")
 source("./src/creationAnaDiff.R")
+source("./src/writeLineOut.R")
+source("./src/creationFileOut.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest
