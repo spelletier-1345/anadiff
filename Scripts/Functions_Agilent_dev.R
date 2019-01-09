@@ -46,16 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-for (swap in swaps) {
-  dirName <- .creationAnaDiff(dataTest, designPuce, swap, labelling)
-  fileOut <- .creationFileOut(dirName, swap, dataTest)
-  .writeLineOut(paste("Version du script d'analyse :", version), fileOut)
-  .writeLineOut(paste("Fichier arrays utilisé :", folderArray[[2]]), fileOut)
-  .writeLineOut(paste("Le marquage des cibles est :", labelling),fileOut)
-  .writeLineOut(paste("Le design de la puce utilisee est :", designPuce),fileOut)
-  .writeLineOut(paste("Les calculs de bruit de fond sont faits avec :"),fileOut)
-  .writeLineOut(paste(" - les", designList$nbg,
-                      "sondes les moins exprimees pour", designList$export),fileOut)
   ligne <- paste(rep("=",nchar(paste("    ->>     ",swap,"     <<-    "))),collapse = "")
   .writeLineOut(lineOut=paste("\n====",ligne,"====",sep=""), fileOut)
   .writeLineOut(lineOut=paste("====    ->>     ",swap,"     <<-    ===="), fileOut)

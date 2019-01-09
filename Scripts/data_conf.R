@@ -6,8 +6,10 @@
 
 conf  <- c()
 conf0 <- c()
+
+conf$dataTest <- "/home/spelletier/Documents/Projets/Agilent/Data/"
+
 conf$version <- "AnaDiff_Script_functions_v4.1.R" # TODO
-conf$dataTest <- TRUE
 conf$adresse <- .adresse(conf$dataTest)
 conf0$localOpt <- options() ; options(warn=-1)
 conf$pck <- c("limma", "httr", "jsonlite")

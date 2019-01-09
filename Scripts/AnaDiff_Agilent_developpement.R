@@ -21,10 +21,15 @@ source("./src/selectionDossier.R")
 # pendant le développement (dataTest=TRUE) : 
 # Créer un nouveau fichier et le renseigner dans le source suivant
 source("./src/designVersion.R")
+source("./src/creationAnaDiff.R")
 
 # source des données de configuration
+# Vérifier le chemin des dataTest
 source("./data_conf.R")
 
 # source des données de travail
+# Modification possibles : 
+# - numéro de design
+# - labelling
 source("./data_test.R")
 

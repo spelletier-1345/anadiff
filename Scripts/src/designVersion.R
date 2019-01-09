@@ -3,13 +3,15 @@
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.designVersion <- function(designPuce, adresse, dataTest) {
+.designVersion <- function(designPuce, adresse, dataTest=NULL) {
   # importe les attributs correspondant au design de la puce
   # Args:
   #   designPuce : design de la puce utilisee
   # Returns:
   #   designInfo : dataframe comportant les differentes infos relatives au design utilise
-  if (dataTest) {
+  if (!is.null(dataTest)) {
+    # Utilisation d'un fichier designSpecificity.txt de test
+    # Mettre le nom du fichier à tester
     designInfo <- read.table(paste(adresse,"designSpecificity.txt",sep=""),sep="\t",header=T)
   } else {
     designInfo <- read.table(paste(adresse,"designSpecificity.txt",sep=""),sep="\t",header=T)

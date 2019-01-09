@@ -250,37 +250,7 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   return(bkg=list(moyenne=mAbg,ecarttype=sdAbg,background=bg))   # sortie : liste des elements moyenne, sd et bg
 }
 
-.creationAnaDiff <- function(dataTest, designPuce, swap, labelling) { #valide
-  # Creation du dossier AnaDiff et du fichier out
-  # Args:
-  #   rien
-  # CeQuIlFait:
-  #   verifie si le dossier AnaDiff existe deja
-  #   si oui : invite a le deplacer
-  #   si non : cree le dossier
-  #   defini le dossier de travail
-  # Returns:
-  #   rien
-  cat("Creation du dossier AnaDiff...\n")
-  dirName <- paste("AnaDiff_", swap, sep="")
-  if (dataTest == TRUE) {
-    dirName <- paste("AnaDiff",designPuce,labelling,sep="_")
-  } else if (is.element(dirName,dir())) {
-    numDir <- 1
-    dirName <- paste("AnaDiff_", swap, "(", numDir, ")", sep="")
-    while (is.element(dirName,dir())) {
-      numDir <- numDir+1
-      dirName <- paste("AnaDiff_", swap, "(", numDir, ")", sep="")
-    }
-  }
-  cat("... Dossier de travail : ",dirName,"\n")
-  dir.create(dirName,showWarnings=F)
-  dir.create(paste(dirName, "antisens", sep="/"),showWarnings=F)
-  dir.create(paste(dirName, "sens", sep="/"),showWarnings=F)
-  dir.create(paste(dirName, "qualityControl_geoSubmission", sep="/"),showWarnings=F)
-  dirName <- paste(dirName,"/",sep="")
-  return(dirName)
-}
+
 
 .creationFileOut <- function(dirName, swap, dataTest) {
   # Cree le fichier out dans le dossier dirName
