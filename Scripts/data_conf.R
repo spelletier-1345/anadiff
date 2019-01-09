@@ -1,4 +1,5 @@
 ###############################################
+# AnaDiff Agilent
 # Données de configuration
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################

@@ -22,3 +22,4 @@ source("./src/selectionDossier.R")
 source("./data_conf.R")
 
 # source des données de travail
+source("./data_test.R")
