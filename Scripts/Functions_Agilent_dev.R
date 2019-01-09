@@ -46,13 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-arraysTxt <- read.table(folderArray[[2]], header=T, encoding="utf-8")
-cat("Definition du swap...\n")
-swaps <- paste(unique(arraysTxt$Swaps))
-designList <- .designVersion(designPuce, adresse, dataTest)
-exports = designList$export
-alertes <- data.frame(matrix(vector(),nrow=0, ncol=6,
-                             dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
 for (swap in swaps) {
   dirName <- .creationAnaDiff(dataTest, designPuce, swap, labelling)
   fileOut <- .creationFileOut(dirName, swap, dataTest)

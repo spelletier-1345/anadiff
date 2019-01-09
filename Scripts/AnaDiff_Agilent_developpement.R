@@ -13,13 +13,18 @@ rm(list=ls(all.names = TRUE))
 # source des fonctions précédentes
 source("./Functions_Agilent_v4.1.R")
 
-# source des fonctions modifiées
+# source des fonctions (mises à jour)
 source("./src/adresse.R")
 source("./src/verifPackages.R")
 source("./src/selectionDossier.R")
+# Possibilité de modifier le fichier de designSpeificities.txt
+# pendant le développement (dataTest=TRUE) : 
+# Créer un nouveau fichier et le renseigner dans le source suivant
+source("./src/designVersion.R")
 
 # source des données de configuration
 source("./data_conf.R")
 
 # source des données de travail
 source("./data_test.R")
+
