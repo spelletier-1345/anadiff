@@ -20,5 +20,6 @@ data$alertes <- data.frame(matrix(vector(),nrow=0, ncol=6,
 data$swap <- data$swaps[1]
 data$dirName <- .creationAnaDiff(conf$dataTest, data$designPuce, data$swap, data$labelling)
 data$fileOut <- .creationFileOut(data$dirName, data$swap, conf$dataTest)
+data$arrays <- as.data.frame(.defineArrays(data$dirName, data$fileOut, conf$folderArray[[2]], conf$dataTest))
 
 print("ok")

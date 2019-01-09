@@ -11,7 +11,7 @@
 rm(list=ls(all.names = TRUE))
 
 # source des fonctions précédentes
-source("./Functions_Agilent_v4.1.R")
+# source("./Functions_Agilent_v4.1.R")
 
 # source des fonctions (mises à jour)
 source("./src/adresse.R")
@@ -24,6 +24,8 @@ source("./src/designVersion.R")
 source("./src/creationAnaDiff.R")
 source("./src/writeLineOut.R")
 source("./src/creationFileOut.R")
+source("./src/numPuce.R")
+source("./src/defineArrays.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest

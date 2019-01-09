@@ -46,11 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  ligne <- paste(rep("=",nchar(paste("    ->>     ",swap,"     <<-    "))),collapse = "")
-  .writeLineOut(lineOut=paste("\n====",ligne,"====",sep=""), fileOut)
-  .writeLineOut(lineOut=paste("====    ->>     ",swap,"     <<-    ===="), fileOut)
-  .writeLineOut(lineOut=paste("====",ligne,"====",sep=""), fileOut)
-  arrays <- as.data.frame(.defineArrays(dirName, fileOut, folderArray[[2]]))
   tab <- read.table(folderArray[[2]], header=F, encoding="utf-8")
   tab[-1,1] <- arrays[,1]
   tab <- apply(tab, 2, format)
