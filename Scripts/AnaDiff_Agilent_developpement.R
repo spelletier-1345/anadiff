@@ -27,6 +27,7 @@ source("./src/creationFileOut.R")
 source("./src/numPuce.R")
 source("./src/defineArrays.R")
 source("./src/tabRG.R")
+source("./src/defineCompare.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest

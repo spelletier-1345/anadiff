@@ -46,10 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  .writeLineOut("", fileOut)
-  compare <- .defineCompare(swap, RG$targets, fileOut)
-  alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
-                              dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
   rg4graph <- .RG4Graph(RG=RG, labelling=labelling, dirName=dirName)
   expInt <- .nomFichier("geoSubmission.txt", paste(dirName, "qualityControl_geoSubmission/", sep=""), swap, export="")
   geo <- .normIntensite(rg4graph, "", expInt, "")

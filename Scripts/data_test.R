@@ -23,6 +23,9 @@ data$arrays <- as.data.frame(.defineArrays(data$dirName, data$fileOut, conf$fold
 
 data$RG <- .tabRG(data$swap, data$arrays, conf$dataTest)
 if (data$designPuce=="64677") {data$RG$genes$ProbeName <- substr(data$RG$genes$ProbeName,1,18)} # TODO : test 64677
+data$compare <- .defineCompare(data$swap, data$RG$targets, data$fileOut)
+data$alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
+                            dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
 
 
 print("ok")
