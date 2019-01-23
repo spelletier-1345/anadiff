@@ -26,6 +26,6 @@ if (data$designPuce=="64677") {data$RG$genes$ProbeName <- substr(data$RG$genes$P
 data$compare <- .defineCompare(data$swap, data$RG$targets, data$fileOut)
 data$alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
                             dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
-
+data$rg4graph <- .RG4Graph(RG=data$RG, labelling=data$labelling, dirName=data$dirName, dataTest=conf$dataTest)
 
 print("ok")

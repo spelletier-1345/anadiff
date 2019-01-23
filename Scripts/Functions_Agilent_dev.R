@@ -46,7 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  rg4graph <- .RG4Graph(RG=RG, labelling=labelling, dirName=dirName)
   expInt <- .nomFichier("geoSubmission.txt", paste(dirName, "qualityControl_geoSubmission/", sep=""), swap, export="")
   geo <- .normIntensite(rg4graph, "", expInt, "")
   rm(rg4graph, expInt, geo)
