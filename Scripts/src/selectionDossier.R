@@ -13,7 +13,7 @@
   # Returns:
   #   rien
   if (is.null(inviteDossier)) {
-    fileArray <- "/home/spelletier/Documents/Projets/Agilent/Data/summary.txt"
+    fileArray <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/summary.txt"
 } else {
     cat(inviteDossier)
     readLines(n=1)

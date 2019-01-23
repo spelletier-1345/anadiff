@@ -26,6 +26,7 @@ source("./src/writeLineOut.R")
 source("./src/creationFileOut.R")
 source("./src/numPuce.R")
 source("./src/defineArrays.R")
+source("./src/tabRG.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest
@@ -36,4 +37,9 @@ source("./data_conf.R")
 # - numéro de design
 # - labelling
 source("./data_test.R")
+
+# Analyse des données
+
+# En verssion standard
+# source("./anaDiff_standard.R")
 

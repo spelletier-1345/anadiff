@@ -7,7 +7,7 @@
 conf  <- c()
 conf0 <- c()
 
-conf$dataTest <- "/home/spelletier/Documents/Projets/Agilent/Data/"
+conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
 
 conf$version <- "AnaDiff_Script_functions_v4.1.R" # TODO
 conf$adresse <- .adresse(conf$dataTest)

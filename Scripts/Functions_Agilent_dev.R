@@ -46,15 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  tab <- read.table(folderArray[[2]], header=F, encoding="utf-8")
-  tab[-1,1] <- arrays[,1]
-  tab <- apply(tab, 2, format)
-  .writeLineOut("\nDescription du swap dans le fichier arrays :\n", fileOut)
-  write.table(tab,fileOut,append=TRUE, quote=FALSE, row.names=FALSE, col.names=FALSE)
-  print(arrays,quote=F)
-  
-  RG <- .tabRG(swap, arrays)
-  if (designPuce=="64677") {RG$genes$ProbeName <- substr(RG$genes$ProbeName,1,18)}
   .writeLineOut("", fileOut)
   compare <- .defineCompare(swap, RG$targets, fileOut)
   alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
