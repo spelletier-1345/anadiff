@@ -46,12 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  expInt <- .nomFichier("geoSubmission.txt", paste(dirName, "qualityControl_geoSubmission/", sep=""), swap, export="")
-  geo <- .normIntensite(rg4graph, "", expInt, "")
-  rm(rg4graph, expInt, geo)
-  json <- list(swap=list(name=swap, design=designPuce, labelling=labelling, exports=exports,
-                         fileArray=arrays[,1:4], ctrlName=arrays[1,6], ttmtName=arrays[1,7]))
-  
   for (export in exports) {
     .writeLineOut(paste("\n... genome :",export, "..."),fileOut)
     probe <- designList$probe[which(designList$export==export)]
