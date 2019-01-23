@@ -37,9 +37,9 @@ source("./src/plotSpikes.R")
 source("./src/tabSpikes.R")
 source("./src/nomFichier.R")
 source("./src/normIntensite.R")
-# source("./src/")
-# source("./src/")
-# source("./src/")
+source("./src/selectRGProbes.R")
+source("./src/selectProbes.R")
+source("./src/RGmean.R")
 # source("./src/")
 # source("./src/")
 
@@ -55,6 +55,11 @@ source("./data_test.R")
 
 # Analyse des données
 
-# En verssion standard
-# source("./anaDiff_standard.R")
+# swap
+source("./data_swap.R")
+
+# export
+source("./data_export.R")
+
+# sens
 

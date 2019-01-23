@@ -15,33 +15,3 @@ data$designList <- .designVersion(data$designPuce, conf$adresse, conf$dataTest)
 data$exports = data$designList$export
 data$alertes <- data.frame(matrix(vector(),nrow=0, ncol=6,
                                   dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
-# Swap
-data$swap <- data$swaps[1]
-data$dirName <- .creationAnaDiff(conf$dataTest, data$designPuce, data$swap, data$labelling)
-data$fileOut <- .creationFileOut(data$dirName, data$swap, conf$dataTest)
-data$arrays <- as.data.frame(.defineArrays(data$dirName, data$fileOut, conf$folderArray[[2]], conf$dataTest))
-
-data$RG <- .tabRG(data$swap, data$arrays, conf$dataTest)
-if (data$designPuce=="64677") {data$RG$genes$ProbeName <- substr(data$RG$genes$ProbeName,1,18)} # TODO : test 64677
-data$compare <- .defineCompare(data$swap, data$RG$targets, data$fileOut)
-data$alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
-                            dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
-
-# # Graph, et soumission Geo
-# rg4graph <- .RG4Graph(RG=data$RG, labelling=data$labelling, dirName=data$dirName, dataTest=conf$dataTest)
-# expInt <- .nomFichier("geoSubmission.txt", paste(data$dirName, "qualityControl_geoSubmission/", sep=""),
-#                       data$swap, export="")
-# geo <- .normIntensite(rg4graph, "", expInt, "")
-# rm(rg4graph, expInt, geo)
-
-# # JSON
-# data$json <- list(swap=list(
-#   name=data$swap,
-#   design=data$designPuce,
-#   labelling=data$labelling,
-#   exports=data$exports,
-#   fileArray=data$arrays[,1:4],
-#   ctrlName=data$arrays$CtrName[1],
-#   ttmtName=data$arrays$TtmtName[1]))
-
-print("ok")

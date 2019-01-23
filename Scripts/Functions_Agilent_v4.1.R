@@ -463,78 +463,6 @@ inopsisFileDivision <- function() {
   return(fileOut)
 }
 
-.nomExportAD <- function(export, sense, dirName, swap, adresse) {  # doc !!!
-  # cree une liste de nom pour l'export des fichiers couleur en fonction des formats
-  # Args:
-  #   rien
-  # Returns:
-  #   rien
-  exportS=paste(export, sense, sep="_")
-  dirNameS <- paste(dirName, sense, "/", sep="")
-  htmlC <- .nomFichier("_AnaDiff_Couleur.html", dirNameS, swap, exportS)
-  texte <- .nomFichier("_AnaDiff.txt", dirNameS, swap, exportS)
-  txtWb <- .nomFichier("_AnaDiff_wb.txt", dirNameS, swap, exportS)
-  htmlD <- .nomFichier("_AnaDiff.html", dirNameS, swap, exportS)
-  bkgI  <- .nomFichier("_bkg_intensities.txt", dirNameS, swap, exportS)
-  normI <- .nomFichier("_norm_intensities.txt", dirNameS, swap, exportS)
-  data  <- .nomFichier("_AnaDiff_Data.txt", dirNameS, swap, exportS)
-
-  dirNameQC <- paste(dirName, "qualityControl_geoSubmission/", sep="")
-  removed <- .nomFichier(paste("_", sense, "_probes_removed.txt", sep=""),
-                         paste(dirName, "qualityControl_geoSubmission/", sep=""), swap, export)
-  tabDble <- .nomFichier("_AnaDiff.txt", dirName, swap, export)
-  colDble <- .nomFichier("_AnaDiff.html", dirName, swap, export)
-  return(list(htmlC=htmlC, texte=texte, htmlD=htmlD, bkgI=bkgI, normI=normI, txtWb=txtWb,
-              removed=removed, data=data, tabDble=tabDble, colDble=colDble))
-}
-
-.nomFichier <- function(texte, dirName, swap, export) {
-  t <- paste("_",export,texte, sep="")
-  nom <- paste(dirName,swap,t,sep="")
-  return(nom)
-}
-
-.normIntensite <- function(MA, tab, expName, probe) {
-  # Recupere les intensites normalisees par echantillon hybride et les exporte
-  # Args:
-  #   MA : Le tableau general après normalisation
-  #   tab : les probes triees et nettoyées
-  #   swap : le nom du swap
-  # Returns:
-  #   le tableau des intensites normalisees
-  print("OK")
-  cat("recuperation des intensites normalisees individuelles...\n")
-  RGnorm <- RG.MA(MA)    # Retransformer les donnees MA en RG (non log2)
-  norm_intensities <- data.frame (RGnorm$genes$ProbeName,log2(RGnorm$R),log2(RGnorm$G))
-  name_sample <- c()
-  dye         <- c() # pour faire le tri des colonnes ensuite : ctl d'abord puis ttmt apres
-  cat("definition des dyes utilises pour chaque echantillon hybride...\n")
-  for (maRow in seq(1,nrow(MA$targets))) {
-    name_sample <- c(name_sample, paste(MA$targets[maRow,3], "Cy5", sep="_"))
-    dye <- c(dye, ifelse(MA$targets[maRow,4]==3, "z", "y"))
-  }
-  for (maRow in seq(1,nrow(MA$targets))) {
-    name_sample <- c(name_sample, paste(MA$targets[maRow,2], "Cy3", sep="_"))
-    dye <- c(dye, ifelse(MA$targets[maRow,4]==3, "y", "z"))
-  }
-  colnames(norm_intensities) <- c("Agilent_id",name_sample)
-  dye <- c("Agilent_id",dye)
-  norm_intensities <- norm_intensities[,order(dye)]
-  if (probe!="") {
-    norm_intensities <- .selectProbes(norm_intensities, probe=probe)
-    norm_intensities <- merge(tab[,1:2],norm_intensities,by="Agilent_id")
-    norm_intensities$mean <- apply(norm_intensities[,-c(1,2)],1,mean)
-    norm_intensities <- norm_intensities[which(round(norm_intensities$Amean,5)==round(norm_intensities$mean,5)),]
-    norm_intensities <- norm_intensities[!duplicated(norm_intensities[,c('Agilent_id','Amean')]),]
-    norm_intensities <- norm_intensities[,-c(2, ncol(norm_intensities))]
-    colnames(norm_intensities)[which(colnames(norm_intensities)=="Agilent_id")] <- "probe_id"
-  } else {
-    norm_intensities <- cbind(MA$genes, norm_intensities[,-1])
-  }
-  write.table(norm_intensities,expName, quote=F,sep="\t",row.names=F,dec=".")
-  return(norm_intensities)
-}
-
 
 .probeRemoved <- function(tab, norm_intensities, expName, fileOut){
   # identifie les sondes ecartees de l'analyse, ajoute les valeur d'intensite et exporte
@@ -558,43 +486,6 @@ inopsisFileDivision <- function() {
   return(nrow(probes_removed))
 }
 
-
-.RGmean <- function(RG) {
-  RGmean <- new("RGList")
-  p <- aggregate(RG$Rb, by=list(RG$genes$ProbeName) ,mean)
-  RGmean$R <- as.matrix(aggregate(RG$R, by=list(RG$genes$ProbeName) ,mean)[,-1])
-  RGmean$G <- as.matrix(aggregate(RG$G, by=list(RG$genes$ProbeName) ,mean)[,-1])
-  RGmean$Rb <- as.matrix(p[,-1])
-  RGmean$Gb <- as.matrix(p[,-1])
-  RGmean$targets <- RG$targets
-  ProbeName <- p[,1]
-  RGmean$genes <- as.data.frame(ProbeName)
-  return(RGmean)
-}
-
-.selectProbes <- function(tab, probe) {
-  # selection des sondes et homogeneisation des probe_id des duplicats
-  # Args:
-  #   designPuce : type de puce utilisee
-  #   tab : tableau de donnees avec Agilent_id
-  # Returns:
-  #   tab : tableau de donnees sans les sondes interne Agilent et avec les probe_id definitifs
-  cat("\nSelection des sondes...\n")
-  tmp <- tab[0,]
-  for (indProbe in probe) {
-    l <- nchar(indProbe)
-    tmp <- rbind(tmp,tab[which(substr(tab$Agilent_id,1,l)==indProbe),]) # remplacement de 3 par l
-  }
-  return(tmp)
-}
-
-.selectRGProbes <- function(RGlist, probe) {
-  RGgenes <- data.frame(RGlist$genes, probeRow = rownames(RGlist$genes))
-  RGgenes$Agilent_id <- RGgenes$ProbeName
-  RGprobe <- .selectProbes(tab = RGgenes, probe)
-  RGtmp <- RGlist[RGlist$genes$ProbeName %in% RGprobe$ProbeName,]
-  return(RGtmp)
-}
 
 singleTiffCompilation <- function() {
   cat("\nCompilation of raw data files from singleTiff to one multiTiff file\n")

@@ -46,21 +46,11 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-  for (export in exports) {
-    .writeLineOut(paste("\n... genome :",export, "..."),fileOut)
-    probe <- designList$probe[which(designList$export==export)]
-    genome  <- designList$annotation[which(exports==export)]
-    nbg  <- designList$nbg[which(exports==export)]
-    RGtmp <- .selectRGProbes(RG, probe)
-    RGtmp <- .RGmean(RGtmp)
-    sensTxt <- paste(adresse, genome, sep="")
-    probeListe <- read.csv(file=sensTxt,sep="\t",header=T,encoding="utf-8", check.names=F, as.is=T)[,1:2]
-    
     for (senseStep in c("sens", "antisens")) {
       #for (senseStep in c("antisens")) {
-      sense <- ifelse(labelling=="indirect", ifelse(senseStep=="sens", "antisens", "sens"), senseStep)
-      .writeLineOut(paste("\n===>>>   Analyse des sondes", sense), fileOut)
-      expName <- .nomExportAD(export, sense, dirName, swap=swap, adresse=adresse)
+      sense <- ifelse(data$labelling=="indirect", ifelse(senseStep=="sens", "antisens", "sens"), senseStep)
+      .writeLineOut(paste("\n===>>>   Analyse des sondes", sense), data$fileOut)
+      expName <- .nomExportAD(export, sense, data$dirName, swap=swap, adresse=conf$adresse)
       if (senseStep=="sens") {
         pl <- data.frame(V1=probeListe[,1])
       } else {
@@ -71,7 +61,9 @@ designPuce <- "85372" # Medicago v1
         RGsens <- RGtmp[RGtmp$genes$ProbeName %in% pl$V1,]
         MA <- normalizeWithinArrays(RGsens,method="loess",bc.method="none")
         res <- .statAnaDiff(MA, swap, export, fileOut, compare)
-        tabResult <- res$tabFit
+        tabResult1 <- res$tabFit
+        tabResult2 <- .normalizeSense(RGtmp, pl, swap, export, data$fileOut, data$compare)
+        # TODO : vérifier que tout marche jusque là et comparer les deux tabResult
       } else { # Normalisation de l'ensemble puis séparation des antisens
         MA <- normalizeWithinArrays(RGtmp,method="loess",bc.method="none")
         res <- .statAnaDiff(MA, swap, export, fileOut, compare)
