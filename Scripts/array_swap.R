@@ -17,22 +17,3 @@ if (data$designPuce=="64677") {swap$RG$genes$ProbeName <- substr(swap$RG$genes$P
 swap$compare <- .defineCompare(swap$swap, swap$RG$targets, swap$fileOut)
 swap$alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
                                  dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
-
-# Graph, et soumission Geo
-if (conf$graph) {
-  rg4graph <- .RG4Graph(RG=swap$RG, labelling=data$labelling, dirName=swap$dirName, dataTest=conf$dataTest)
-  expInt <- .nomFichier("geoSubmission.txt", paste(swap$dirName, "qualityControl_geoSubmission/", sep=""),
-                        swap$swap, export="")
-  geo <- .normIntensite(rg4graph, "", expInt, "")
-  rm(rg4graph, expInt, geo)
-}
-
-# JSON
-swap$json <- list(swap=list(
-  name=swap$swap,
-  design=data$designPuce,
-  labelling=data$labelling,
-  exports=data$exports,
-  fileArray=swap$arrays[,1:4],
-  ctrlName=swap$arrays$CtrName[1],
-  ttmtName=swap$arrays$TtmtName[1]))

@@ -77,6 +77,7 @@ source("./array_dataTest.R")
 # swap
 # for (swap in swaps) {
 source("./array_swap.R")
+if (conf$graph) {source("./array_graph-GEO.R")}
 
 # export
 # for (export in exports) {
@@ -85,6 +86,8 @@ source("./array_export.R")
 # sens
 # for (senseStep in c("sens", "antisens")) {
 source("./array_sens.R")
+
+if (conf$db) {source("./array_json4db.R")}
 
 
 

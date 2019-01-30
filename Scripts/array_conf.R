@@ -8,6 +8,7 @@ conf  <- c()
 
 conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
 conf$graph <- FALSE
+conf$db <- FALSE
 
 conf$version <- "AnaDiff_Script_functions_v5.R" # TODO
 conf$adresse <- .adresse(conf$dataTest)
