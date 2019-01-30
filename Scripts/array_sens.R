@@ -9,14 +9,20 @@ sens <- c()
 sens$sens <- c("sens", "antisens")
 
 # for (s in sens$sens) {
-s <- sens$sens[1]
+se <- sens$sens[1]
 
-sens$sensLabel <- ifelse(data$labelling=="indirect", ifelse(s=="sens", "antisens", "sens"), s)
+sens$sensLabel <- ifelse(data$labelling=="indirect", ifelse(se=="sens", "antisens", "sens"), se)
+.writeLineOut(paste("\n===>>>   Analyse des sondes", se), swap$fileOut)
 sens$expName <- .nomExportAD(export$export, sens$sensLabel, data$dirName, swap$swap, adresse=conf$adresse)
-if (s=="sens") {
+if (se=="sens") {
   sens$probeList <- data.frame(V1=export$probeList[,1])
 } else {
   sens$probeList <- data.frame(V1=export$probeList[,2])
 }
-cat("\nnormalisation des donnees par Lowess...")
+cat("\nnormalisation des donnees par Lowess...\n")
 
+if (sens$sensLabel=="sens") { # Séparation des sens puis normalisation des sens uniquement
+  sens$tabResult <- .normalizeSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare)
+} else { # Normalisation de l'ensemble puis séparation des antisens
+  sens$tabResult <- .normalizeAntiSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare, export$probe)
+}

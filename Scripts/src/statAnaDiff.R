@@ -3,7 +3,7 @@
 # Le 30 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.statAnaDiff <- function(MA, swap, export, fileOut, compare, dataTest=conf$dataTest) {
+.statAnaDiff <- function(MA, fileOut, compare, dataTest=conf$dataTest) {
   if (!is.null(dataTest)) {print("statAnaDiff")}
   # Traitement statistique des donnees
   # Args:
