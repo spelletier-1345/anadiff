@@ -6,15 +6,11 @@
 
 export <- c()
 
-export$export <- data$exports
-
 # Sélection des sondes
-export$probe  <- data$designList$probe[which(data$designList$export==export)]
-export$genome <- data$designList$annotation[which(data$exports==export)]
-export$nbg    <- data$designList$nbg[which(data$exports==export)]
+export$probe  <- data$designList$probe[which(data$designList$export==ex)]
+export$nbg    <- data$designList$nbg[which(data$exports==ex)]
 export$RGtmp  <- .selectRGProbes(swap$RG, export$probe)
 export$RGtmp  <- .RGmean(export$RGtmp)
-export$sensTxt <- paste(conf$adresse, export$genome, sep="")
-export$probeList <- read.csv(file=export$sensTxt, sep="\t", header=T, encoding="utf-8", check.names=F, as.is=T)[,1:2]
-
-
+export$annot <- data$designList$annotation[which(data$exports==ex)]
+export$annot <- paste(conf$adresse, export$annot, sep="")
+export$probeList <- read.csv(file=export$annot, sep="\t", header=T, encoding="utf-8", check.names=F, as.is=T)[,1:2]
