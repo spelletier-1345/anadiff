@@ -22,7 +22,13 @@ if (se=="sens") {
 cat("\nnormalisation des donnees par Lowess...\n")
 
 if (sens$sensLabel=="sens") { # Séparation des sens puis normalisation des sens uniquement
-  sens$tabResult <- .normalizeSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare)
+  sens$normalize <- .normalizeSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare)
 } else { # Normalisation de l'ensemble puis séparation des antisens
-  sens$tabResult <- .normalizeAntiSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare, export$probe)
+  sens$normalize <- .normalizeAntiSense(export$RGtmp, sens$probeList, swap$fileOut, data$compare, export$probe)
 }
+sens$normalize$tabResult$probe_id <- sens$normalize$tabResult$Agilent_id
+sens$tabResultComplet <- sens$normalize$tabResult
+
+sens$statBkg <- .statBkg(sens$normalize$tabResult, export$nbg, swap$fileOut, targets = sens$normalize$MA$targets)
+sens$normalize$tabResult <- sens$statBkg$tab
+sens$normalize$tabResult <- .statBh(sens$normalize$tabResult, data$popBH, data$statBH, swap$fileOut)

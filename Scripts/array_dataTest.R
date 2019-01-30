@@ -8,6 +8,8 @@ data <- c()
 
 data$designPuce <- "84550" # Carrot v1
 data$labelling <- "direct"
+data$popBH <- "alternate"
+data$statBH <- "BH"
 
 data$arraysTxt <- read.table(paste(conf$folderArray, collapse = ""), header=T, encoding="utf-8")
 data$swaps <- paste(unique(data$arraysTxt$Swaps))

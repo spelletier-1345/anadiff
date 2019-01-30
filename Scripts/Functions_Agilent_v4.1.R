@@ -77,6 +77,7 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
 
     print(exports)
     for (export in exports) {
+      print("OK 1")
       .writeLineOut(paste("\n... genome :",export, "..."),fileOut)
       probe <- designList$probe[which(designList$export==export)]
       genome  <- designList$annotation[which(exports==export)]
@@ -239,25 +240,6 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   return(NULL)
 }
 
-.calcBkg <- function(intensite, nbg, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("calcBkg")}
-  # calcul du bruit de fond en fonction de nbg
-  # Args:
-  #   intensite : liste des intensitees
-  #   nbg : nombre de sonde pour le calcul
-  # Returns:
-  #   bkg : liste d'info : moyenne, ecart-type, bruit de fond calcule
-  Abg   <- intensite[intensite<=sort(intensite)[nbg]]      # Abg = Tri des nbg plus petites valeurs
-  mAbg  <- mean(Abg,na.rm=T)       # mAbg est la moyenne de ces nbg plus petites valeurs
-  sdAbg <- sd(Abg,na.rm=T)         # sdAbg est l'ecart type de ces nbg plus petites valeurs
-  bg    <- mAbg+2*sdAbg            # Calcul du bruit de fond
-  return(bkg=list(moyenne=mAbg,ecarttype=sdAbg,background=bg))   # sortie : liste des elements moyenne, sd et bg
-}
-
-
-
-
-
 .exportAnaDiff <- function(export, genome, probe, tabResult, adresse, expName,
                            fileOut, swap, dec=".", designPuce, senseStep, sense,
                            statBH, dataTest=conf$dataTest) {
@@ -375,59 +357,6 @@ inopsisFileDivision <- function(dataTest=conf$dataTest) {
     write.table(files[[i]], fileName, quote=F, sep="\t", row.names=F, col.names=F, dec=".", append=T) # Valeurs
   }
   cat("\nJob is done", "\n")
-}
-
-.kerfdr<-function (pv, fileOut, lambda = seq(0, 0.9, 0.05), dataTest=conf$dataTest,
-                   cuts = c(1e-04, 0.001, 0.01, 0.025, 0.05, 0.1)) {
-  if (!is.null(dataTest)) {print("kerfdr")}
-  ## script IPS2 (Véronique Brunaud)
-  ## modif de la methode storey
-  ## inclusion du etape de smoothing
-  pi0.lambda<-apply(as.matrix(lambda), 1, FUN = function(x) mean(pv >= x)/(1 - x))
-  pi1<- 1-pi0.lambda
-  if(length(lambda)!=1) {
-    pi0.spline <- smooth.spline(lambda, pi0.lambda, df = 3)
-    pi0 <- max(0, min(predict(pi0.spline, x = max(lambda))$y,1))
-    pi1<-1-pi0
-  }
-  if (pi1 < 0) {
-    warning(paste("estimated pi1 =", round(pi1, digit = 4), "set to 0.0"))
-    pi1 = 0
-  }
-  if (pi1 > 1) {
-    warning(paste("estimated pi1 =", round(pi1, digit = 4), "set to 1.0"))
-    pi1 = 1
-  }
-  pi0 = 1 - pi1
-  ## modification pour tenir compte de la correction par pi0
-  bon.pi0 = (pv *pi0 ) * length(pv)
-  bon.pi0[which(bon.pi0 > 1)] = 1
-  ## modification pour tenir compte de la correction par pi0
-  bh.pi0 = (pv*pi0) * length(pv)/rank(pv)
-  bh.pi0[which(bh.pi0 > 1)] = 1
-  ## modification pour tenir compte de la correction par pi0
-  bon = (pv *1 ) * length(pv)
-  bon[which(bon > 1)] = 1
-  ## modification pour tenir compte de la correction par pi0
-  bh = (pv*1) * length(pv)/rank(pv)
-  bh[which(bh > 1)] = 1
-  counts <- sapply(cuts,
-                   function(x) c(`p-value` = sum(pv <= x),
-                                 `FWER (Bonf.)` = sum(bon <= x),
-                                 `FWER (Bonf. with m0)` = sum(bon.pi0 <= x),
-                                 `FDR (BH)` = sum(bh <= x),
-                                 `qvalue` = sum(bh.pi0 <= x)))
-  colnames(counts) <- paste("<", cuts, sep = "")
-  #cat("\n") ; print(counts) ;cat("\n")
-  tab <- rbind(colnames(counts),counts)
-  tab <- cbind(rownames(tab),tab)
-  tab <- apply(tab, 2, format)
-  .writeLineOut("\nContrôle des faux positifs :\n",fileOut)
-  write.table(tab, fileOut, append=TRUE, quote=FALSE, row.names=FALSE, col.names=FALSE)
-  print(tab[-1,-1],quote=F) ; cat("\n")
-  results = list(pv = pv, pi0 = pi0, pi1 = pi1, BH=bh, Bonferroni=bon,Bonferroni.with.m0=bon.pi0,
-                 qvalue=bh.pi0,summary = counts)
-  return(results)
 }
 
 .look <- function(ratio, stats, seuil, dataTest=conf$dataTest) {
@@ -635,64 +564,6 @@ singleTiffCompilation <- function(dataTest=conf$dataTest) {
     setwd("..")
   }
   cat("\n The job is done :)\nThanks for using our tools and citing Sandra Pelletier for this job\n")
-}
-
-.statBh <- function(tab, popBH, statBH, fileOut, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("statBh")}
-  # selection des meilleurs pval et calcul du BH
-  # Args:
-  #   tab : tableau de donnees avec pvalue
-  # Returns:
-  #   tab : tableau de donnees analysees avec BH
-  if (popBH=="complete") {
-    cat("test BH : traitement des faux-positifs, methode \"complete\"...\n")
-    tab[[statBH]] <- .kerfdr(tab$pvalue, fileOut)[[statBH]]
-  } else {
-    cat("test BH : traitement des faux-positifs, methode \"alternate\"...\n")
-    tmp <- tab[tab[,2]>=0.5 | tab[,3]>=0.5,]
-    tmp[[statBH]] <- .kerfdr(tmp$pvalue, fileOut)[[statBH]]
-    tab <- merge(tab,tmp[,c(1,6)], by="probe_id", all.x=T)
-    tab[[statBH]][which(is.na(tab[[statBH]]))] <- 1
-  }
-  return(tab)
-}
-
-.statBkg <- function(tab, nbg, dirName, fileOut, targets, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("statBkg")}
-  # calcul des intensite par echantillon et soustraction du bruit de fond
-  # tri le tableau par probe_id et l'enregistre
-  # Args:
-  #   tab : tableau de donnees avec probe_id, Amean et ratio
-  #   nbg : nombre de sonde pour le calcul
-  #   dirName : dossier d'export pour .writeLineOut
-  #   targets : sous-tableau de array correspondant au swap, provenant de RG$targets
-  # Returns:
-  #   tab : tableau de donnees avec intensite soustraite du bruit de fond par echantillon
-  cat("calcul de l'intensite de l'echantillon controle...\n")
-  IGreen    <- tab$Amean - tab$ratio/2
-  bkgGreen  <- .calcBkg(IGreen,nbg)
-  IGreenBkg <- round(IGreen - bkgGreen$background,2)
-  cat("calcul de l'intensite de l'echantillon traitement\n")
-  IRed   <- tab$Amean + tab$ratio/2
-  bkgRed  <- .calcBkg(IRed,nbg)
-  IRedBkg <- round(IRed - bkgRed$background,2)
-
-  stat <- list(ctrl=list(mean=round(bkgGreen$moyenne,4),
-                         dev=round(bkgGreen$ecarttype,4),
-                         bkg=round(bkgGreen$background,4)),
-               ttmt=list(mean=round(bkgRed$moyenne,4),
-                         dev=round(bkgRed$ecarttype,4),
-                         bkg=round(bkgRed$background,4)))
-  .writeLineOut("Valeurs du bruit de fond du swap :\n", fileOut)
-  .writeLineOut("          \tControle\tTraitement", fileOut)
-  .writeLineOut(paste("moyenne   \t",round(bkgGreen$moyenne,4),"\t",round(bkgRed$moyenne,4)), fileOut)
-  .writeLineOut(paste("ecart-type\t",round(bkgGreen$ecarttype,4),"\t",round(bkgRed$ecarttype,4)), fileOut)
-  .writeLineOut(paste("background\t",round(bkgGreen$background,4),"\t",round(bkgRed$background,4)), fileOut)
-
-  cat("\nsoustraction du bruit de fond dans le tableau de donnees...\n")
-  tab <- data.frame(tab[,1],IGreenBkg,IRedBkg,round(tab[,3:4],4))
-  names(tab)[1:3] <- c("probe_id", paste(targets$CtrName[1],".bg",sep=""), paste(targets$TtmtName[1],".bg",sep=""))
-  return(list(tab=tab, stat=stat))
 }
 
 .statWoBkg <- function(tab, targets, dataTest=conf$dataTest) {
