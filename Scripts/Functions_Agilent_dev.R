@@ -46,31 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-    for (senseStep in c("sens", "antisens")) {
-      #for (senseStep in c("antisens")) {
-      sense <- ifelse(data$labelling=="indirect", ifelse(senseStep=="sens", "antisens", "sens"), senseStep)
-      .writeLineOut(paste("\n===>>>   Analyse des sondes", sense), data$fileOut)
-      expName <- .nomExportAD(export, sense, data$dirName, swap=swap, adresse=conf$adresse)
-      if (senseStep=="sens") {
-        pl <- data.frame(V1=probeListe[,1])
-      } else {
-        pl <- data.frame(V1=probeListe[,2])
-      }
-      cat("\nnormalisation des donnees par Lowess...")
-      if (sense=="sens") { # Séparation des sens puis normalisation des sens uniquement
-        RGsens <- RGtmp[RGtmp$genes$ProbeName %in% pl$V1,]
-        MA <- normalizeWithinArrays(RGsens,method="loess",bc.method="none")
-        res <- .statAnaDiff(MA, swap, export, fileOut, compare)
-        tabResult1 <- res$tabFit
-        tabResult2 <- .normalizeSense(RGtmp, pl, swap, export, data$fileOut, data$compare)
-        # TODO : vérifier que tout marche jusque là et comparer les deux tabResult
-      } else { # Normalisation de l'ensemble puis séparation des antisens
-        MA <- normalizeWithinArrays(RGtmp,method="loess",bc.method="none")
-        res <- .statAnaDiff(MA, swap, export, fileOut, compare)
-        tabResult <- res$tabFit
-        tabResult <- .selectProbes(tabResult, probe=probe)
-        tabResult <- tabResult[tabResult$Agilent_id %in% pl$V1,]
-      }
       tabResult$probe_id <- tabResult$Agilent_id
       tabResultComplet <- tabResult
       statBkg <- .statBkg(tabResult, nbg = 8000, dirNameOut,
