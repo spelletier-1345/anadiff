@@ -12,6 +12,7 @@
   #   met tous les bruits de fond à 0
   # Returns:
   #   large liste contenant l'ensemble des infos des donnees du swap
+  if (is.null(dataTest)) {print("tabRG")}
   target <- arrays[arrays$Swaps==swap,]   # identification des lames à analyser ensemble
   if (!is.null(dataTest)) {target$FileName <- paste(dataTest, target$FileName, sep="")}
   spots  <- list(R="rMedianSignal",G="gMedianSignal",Rb="rBGMedianSignal",Gb="gBGMedianSignal")
@@ -23,4 +24,3 @@
   RG$G[RG$G==0] <- 0.5
   return(RG)
 }
-

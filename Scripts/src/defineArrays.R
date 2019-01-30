@@ -13,6 +13,7 @@
   #   exporte le tableau arrays dans le fichier Out
   # Returns:
   #   le tableau arrays
+  if (is.null(dataTest)) {print("defineArrays")}
   path <- ifelse(!is.null(dataTest), dataTest, ".")
   fileListe <- list.files(path = path, pattern = ("_[[:digit:]]+_[[:digit:]]+.txt$"))
   arrays <- read.table(paste(path, fileArray, sep="/"), header=T, encoding="utf-8")
@@ -24,8 +25,8 @@
     lame_arrays <- substr(ligneArrays,1,12) #
     # file_lame : liste des fichiers dans repertoire avec meme num de lame que dans arrays
     file_lame   <- fileListe[which(substr(fileListe,1,12)==lame_arrays)]
-    
-    
+
+
     if (length(file_lame)==0) {
       # si pas de fichier dans le repertoire -> arret du script
       message <- paste("\n#########################################\n\nIl n'y a pas de puce ",puce_arrays , " pour la lame ", lame_arrays, "\n",
@@ -35,13 +36,13 @@
       cat(message)
       rm(list=ls(all=T))
       stop("Script arrete",call.=F)
-      
+
     } else {
       # puce_arrays : recupere le num de puce dans arrays
       puce_arrays <- substr(ligneArrays,(nchar(ligneArrays)-2),(nchar(ligneArrays)))
       # file_arrays : recupere dans la sous-liste le nom du fichier avec le meme num de puce
       file_arrays <- file_lame[which(.numPuce(fileListe)==puce_arrays)]
-      
+
       if (length(file_arrays)==0) {
         # si pas de fichier dans le repertoire -> arret du script
         message <- paste("\n#########################################\n\nIl n'y a pas de puce ",puce_arrays , " pour la lame ", lame_arrays, "\n",
@@ -51,7 +52,7 @@
         cat(message)
         rm(list=ls(all=T))
         stop("Script arrete",call.=F)
-        
+
       } else {
         arrays$FileName[compteur] <- file_arrays # copie le nom du fichier dans arrays
       }

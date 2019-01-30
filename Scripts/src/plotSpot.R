@@ -3,7 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.plotSpot <- function(RGlogTab, indNbCol, nbCol, state, maxRowCol) {
+.plotSpot <- function(RGlogTab, indNbCol, nbCol, state, maxRowCol, dataTest=NULL) {
+  if (is.null(dataTest)) {print("plotSpot")}
   indNbCol <- indNbCol+3
   if (state == "Cy3") {
     val <- round(RGlogTab[,indNbCol+nbCol]-min(RGlogTab[,indNbCol+nbCol])+1)

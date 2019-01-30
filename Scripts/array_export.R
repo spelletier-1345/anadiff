@@ -18,4 +18,3 @@ export$sensTxt <- paste(conf$adresse, export$genome, sep="")
 export$probeList <- read.csv(file=export$sensTxt, sep="\t", header=T, encoding="utf-8", check.names=F, as.is=T)[,1:2]
 
 
-print("ok")

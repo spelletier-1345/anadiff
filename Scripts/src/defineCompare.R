@@ -3,7 +3,7 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.defineCompare <- function(swap, targets, fileOut) {
+.defineCompare <- function(swap, targets, fileOut, dataTest=NULL) {
   # definie le vecteur de comparaison pour limma
   # Args:
   #   swap : nom du swap
@@ -13,6 +13,7 @@
   #   verifie si dans la colonne "Control" il y a la valeur 3 ou 5
   # Returns:
   #   compare : vecteur de comparaison (liste de 1 et -1)
+  if (is.null(dataTest)) {print("defineCompare")}
   cat("Definition du vecteur de comparaisons...\n\n")
   compare <- c() ; y <- 0
   for (dye in targets$Control) {  # Une boucle pour chaque lame du dye-switch

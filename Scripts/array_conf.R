@@ -5,7 +5,6 @@
 ###############################################
 
 conf  <- c()
-conf0 <- c()
 
 conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
 

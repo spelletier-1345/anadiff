@@ -4,13 +4,14 @@
 ###############################################
 
 .RG4Graph <- function(RG, labelling, dirName, dataTest=NULL) {
+  if (is.null(dataTest)) {print("RG4Graph")}
   # Transformation de RG en MA
   MA <- normalizeWithinArrays(RG,method="loess",bc.method="none")
   # Récupération des données de RG et MA en data.frame
   RGdf <- data.frame(RG$genes$ProbeName, RG$genes$Row, RG$genes$Col, RG$R, RG$G)
   MAdf <- data.frame(MA$genes$ProbeName, MA$genes$Row, MA$genes$Col, MA$M, MA$A)
   maxRowCol <- c(max(RG$genes$Row), max(RG$genes$Col))
-  
+
   # Transformation en log2 des données RG
   RGl2 <- RGdf
   RGl2[,-c(1:3)] <- log2(RGdf[,-c(1:3)])
@@ -48,7 +49,7 @@
                                   "(+)E1A_r60_a104",
                                   "(+)E1A_r60_a22"),
                          expect=c(-3.322,-1.585,-1.585,-1.585,0,0,1.585,1.585,1.585,3.322))
-    
+
     for (indColSpikes in seq(2,(ncol(spikesRG)))) {
       spikes <- merge(spikes, spikesRG[,c(1,indColSpikes)], by.x="spikes", by.y="Group.1")
       spikes <- merge(spikes, spikesMA[,c(1,indColSpikes)], by.x="spikes", by.y="Group.1")

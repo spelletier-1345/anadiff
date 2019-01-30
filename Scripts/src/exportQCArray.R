@@ -6,6 +6,7 @@
 .exportQCArray <- function(chip, smoothScatterRG, smoothScatterMA, histRG, histMA,
                            spikesPlot, spikesTab, greenLoc, redLoc, diffLoc, labelling, dirName, dataTest=NULL) {
   graphics.off()
+  if (is.null(dataTest)) {print("exportQCArray")}
   if(!is.null(dataTest)) {chip <- gsub(dataTest, "", chip)}
   pngName <- paste(dirName, "qualityControl_geoSubmission/", gsub(".txt", ".png", chip), sep="")
   png(pngName, width=768, height=1086, res=120)
@@ -67,4 +68,3 @@
   mtext(chip, side = 3, line = 1, outer = TRUE, cex = 0.8, font = 4, col="darkblue")
   dev.off()
 }
-

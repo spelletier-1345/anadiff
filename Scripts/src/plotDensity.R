@@ -3,7 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.plotDens <- function(l2Tab, nbCol, state) {
+.plotDens <- function(l2Tab, nbCol, state, dataTest=NULL) {
+  if (is.null(dataTest)) {print("plotDens")}
   dmat<- matrix(nrow = 2*nbCol, ncol=2)
   mode(dmat)="list"
   dmax <- 1

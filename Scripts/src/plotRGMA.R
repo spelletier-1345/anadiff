@@ -3,7 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.plotRGMA <- function(RGMAtab, indNbCol, nbCol, state) {
+.plotRGMA <- function(RGMAtab, indNbCol, nbCol, state, dataTest=NULL) {
+  if (is.null(dataTest)) {print("plotRGMA")}
   indNbCol <- indNbCol+3
   if (state == "RG") {
     mainState="Graphe RG avant normalisation par loess"
@@ -26,4 +27,3 @@
   axis(side=2, at=seq(-6,6,6),lwd=0,lwd.ticks=1,pos=3.95, cex.axis=0.6, las=1)
   mtext(side=2,text="Ratio par sonde (log2)",line=1.2, cex=0.7)
 }
-

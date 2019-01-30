@@ -14,6 +14,7 @@
   #   defini le dossier de travail
   # Returns:
   #   rien
+  if (is.null(dataTest)) {print("")}
   dirName <- paste("AnaDiff_", swap, sep="")
   if (!is.null(dataTest)) {
     dirName <- paste(paste(dataTest, "AnaDiff", sep=""),designPuce,labelling,sep="_")

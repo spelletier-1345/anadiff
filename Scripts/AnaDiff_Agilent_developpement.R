@@ -45,21 +45,22 @@ source("./src/RGmean.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest
-source("./data_conf.R")
+source("./array_conf.R")
 
 # source des données de travail
 # Modification possibles : 
 # - numéro de design
 # - labelling
-source("./data_test.R")
+source("./array_dataTest.R")
 
 # Analyse des données
 
 # swap
-source("./data_swap.R")
+source("./array_swap.R")
 
 # export
-source("./data_export.R")
+source("./array_export.R")
 
 # sens
 
+print("done")

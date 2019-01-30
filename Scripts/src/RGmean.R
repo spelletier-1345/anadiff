@@ -3,7 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.RGmean <- function(RG) {
+.RGmean <- function(RG, dataTest=NULL) {
+  if (is.null(dataTest)) {print("RGmean")}
   RGmean <- new("RGList")
   p <- aggregate(RG$Rb, by=list(RG$genes$ProbeName) ,mean)
   RGmean$R <- as.matrix(aggregate(RG$R, by=list(RG$genes$ProbeName) ,mean)[,-1])

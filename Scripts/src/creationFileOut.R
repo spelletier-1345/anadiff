@@ -10,6 +10,7 @@
   #   dirName : dossier d'export pour .writeLineOut
   # Returns:
   #   rien
+  if (is.null(dataTest)) {print("creationFileOut")}
   if (!is.null(dataTest)) {
     fileOut <- paste(dirName, "qualityControl_geoSubmission/AnaDiff_", swap, "_out.txt", sep="")
     file.create(fileOut)
