@@ -40,6 +40,25 @@ source("./src/normIntensite.R")
 source("./src/selectRGProbes.R")
 source("./src/selectProbes.R")
 source("./src/RGmean.R")
+source("./src/nomExportAD.R")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
+# source("./src/")
 # source("./src/")
 # source("./src/")
 
@@ -56,11 +75,17 @@ source("./array_dataTest.R")
 # Analyse des données
 
 # swap
+# for (swap in swaps) {
 source("./array_swap.R")
 
 # export
+# for (export in exports) {
 source("./array_export.R")
 
 # sens
+# for (senseStep in c("sens", "antisens")) {
+source("./array_sens.R")
+
+
 
 print("done")

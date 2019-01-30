@@ -1,7 +1,7 @@
 ###############################################
 # AnaDiff Agilent
 # Données d'un swap
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
 swap <- c()
