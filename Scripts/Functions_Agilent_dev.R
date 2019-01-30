@@ -46,15 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-      if (bkgCalculation==F) {
-        tabWBkg <- .statWoBkg(tabResultComplet, targets = MA$targets)
-        tabResultWBkg <- tabResult
-        tabResultWBkg[,2:3] <- tabWBkg[,2,3]
-        tabResultWBkg$sense <- sense
-        tabFinalWBkg <- .mergeAnnot(annotations = genome, tabResult = tabResultWBkg, adresse = adresse)
-        tabFinalWBkg <- tabFinalWBkg[order(tabFinalWBkg$probe_id),]
-        write.table(tabFinalWBkg,expName$txtWb,row.names=F,col.names=T,quote=F,sep="\t",dec=dec)
-      }
       normIntensities <- .normIntensite(MA, tab = tabResultComplet, expName$normI, probe=probe)
       .bkgIntensite(normIntensities, nbg = as.numeric(nbg), expName)
       pr <- .probeRemoved(tab = tabResult, normIntensities, expName, fileOut)

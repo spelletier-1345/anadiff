@@ -6,14 +6,9 @@
 
 sens <- c()
 
-sens$sens <- c("sens", "antisens")
-
-# for (s in sens$sens) {
-se <- sens$sens[1]
-
 sens$sensLabel <- ifelse(data$labelling=="indirect", ifelse(se=="sens", "antisens", "sens"), se)
 .writeLineOut(paste("\n===>>>   Analyse des sondes", se), swap$fileOut)
-sens$expName <- .nomExportAD(export$export, sens$sensLabel, data$dirName, swap$swap, adresse=conf$adresse)
+sens$expName <- .nomExportAD(export$export, sens$sensLabel, swap$dirName, swap$swap, adresse=conf$adresse)
 if (se=="sens") {
   sens$probeList <- data.frame(V1=export$probeList[,1])
 } else {
@@ -28,7 +23,3 @@ if (sens$sensLabel=="sens") { # Séparation des sens puis normalisation des sens
 }
 sens$normalize$tabResult$probe_id <- sens$normalize$tabResult$Agilent_id
 sens$tabResultComplet <- sens$normalize$tabResult
-
-sens$statBkg <- .statBkg(sens$normalize$tabResult, export$nbg, swap$fileOut, targets = sens$normalize$MA$targets)
-sens$normalize$tabResult <- sens$statBkg$tab
-sens$normalize$tabResult <- .statBh(sens$normalize$tabResult, data$popBH, data$statBH, swap$fileOut)

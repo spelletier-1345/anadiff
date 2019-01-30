@@ -48,8 +48,8 @@ source("./src/statBH.R")
 source("./src/kerfdr.R")
 source("./src/calcBkg.R")
 source("./src/statBkg.R")
-# source("./src/")
-# source("./src/")
+source("./src/statWOBkg.R")
+source("./src/mergeAnnot.R")
 # source("./src/")
 # source("./src/")
 # source("./src/")
@@ -76,16 +76,20 @@ source("./array_dataTest.R")
 
 # swap
 # for (swap in swaps) {
+sw <- data$swaps[1]
 source("./array_swap.R")
 if (conf$graph) {source("./array_graph-GEO.R")}
 
 # export
 # for (export in exports) {
+ex <- data$exports[1]
 source("./array_export.R")
 
 # sens
 # for (senseStep in c("sens", "antisens")) {
+se <- "sens"
 source("./array_sens.R")
+source("./array_stats.R")
 
 if (conf$db) {source("./array_json4db.R")}
 

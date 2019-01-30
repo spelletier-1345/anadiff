@@ -6,7 +6,8 @@
 
 conf  <- c()
 
-conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
+conf$dataTest <- NULL
+conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/" 
 conf$graph <- FALSE
 conf$db <- FALSE
 
