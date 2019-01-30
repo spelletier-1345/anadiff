@@ -3,8 +3,8 @@
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.verifPackages <- function(vPackages, dataTest=NULL) {
-  if (is.null(dataTest)) {print("verifPackages")}
+.verifPackages <- function(vPackages, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("verifPackages")}
   verif <- c()
   for (package in vPackages) {
     if (is.element(package,installed.packages())) {

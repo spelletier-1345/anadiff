@@ -3,7 +3,7 @@
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.writeLineOut <- function(lineOut, fileOut, dataTest=NULL) { #valide
+.writeLineOut <- function(lineOut, fileOut, dataTest=conf$dataTest) { #valide
   # Ecrit une ligne dans le fichier out
   # Args:
   #   lineOut : texte a ecrire
@@ -12,7 +12,7 @@
   #   .nameFileOut(dirName)
   # Returns:
   #   rien
-  if (is.null(dataTest)) {print("writeLineOut")}
+  if (!is.null(dataTest)) {print("writeLineOut")}
   if (fileOut=="noOut") {
     cat(paste(lineOut, "\n", sep=""))
   } else {

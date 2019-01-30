@@ -3,7 +3,7 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.tabRG <- function(swap, arrays, dataTest=NULL) {
+.tabRG <- function(swap, arrays, dataTest=conf$dataTest) {
   # Lecture des donnees
   # Args:
   #   swap : nom du swap
@@ -12,7 +12,7 @@
   #   met tous les bruits de fond à 0
   # Returns:
   #   large liste contenant l'ensemble des infos des donnees du swap
-  if (is.null(dataTest)) {print("tabRG")}
+  if (!is.null(dataTest)) {print("tabRG")}
   target <- arrays[arrays$Swaps==swap,]   # identification des lames à analyser ensemble
   if (!is.null(dataTest)) {target$FileName <- paste(dataTest, target$FileName, sep="")}
   spots  <- list(R="rMedianSignal",G="gMedianSignal",Rb="rBGMedianSignal",Gb="gBGMedianSignal")

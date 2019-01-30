@@ -10,7 +10,8 @@
 #         - Remettre le POST vers DB
 
 anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", statBH="BH",
-                           dataTest=FALSE, bkgCalculation = TRUE) {
+                           dataTest=conf$dataTest, bkgCalculation = TRUE) {
+  if (!is.null(dataTest)) {print("anaDiffAgilent")}
 
   # Note : labelling = c("direct", "indirect")
   # Note : statBH = c("BH", "Bonferroni", "Bonferroni.with.m0", "qvalue")
@@ -171,7 +172,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
 }
 
 
-.alertes <- function(alertes, fileOut) {
+.alertes <- function(alertes, fileOut, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("alertes")}
   al <- c()
   attach(alertes, warn.conflicts = F)
   for (alRow in seq(1:nrow(alertes))) {
@@ -215,7 +217,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   }
 }
 
-.bkgIntensite <- function(norm_intensities, nbg, expName) {
+.bkgIntensite <- function(norm_intensities, nbg, expName, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("bkgIntensite")}
   # soustraie le bruit de fond pour chaque donnee d'intensite normalisee et les exporte
   # Args:
   #   norm_intensite : le tableau d'intensites normalisee
@@ -224,7 +227,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   # Returns:
   #   rien
   cat("soustraction du bruit de fond...\n")
-  ssbkg <- function(intensite, nbg) {
+  ssbkg <- function(intensite, nbg, dataTest=conf$dataTest) {
+    if (!is.null(dataTest)) {print("ssbkg")}
     bkg_intensities <- intensite - .calcBkg(intensite,nbg)$background
     bkg_intensities[which(bkg_intensities<0)] <- 0
     return(bkg_intensities)
@@ -236,7 +240,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   return(NULL)
 }
 
-.calcBkg <- function(intensite, nbg) {
+.calcBkg <- function(intensite, nbg, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("calcBkg")}
   # calcul du bruit de fond en fonction de nbg
   # Args:
   #   intensite : liste des intensitees
@@ -255,7 +260,9 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
 
 
 .exportAnaDiff <- function(export, genome, probe, tabResult, adresse, expName,
-                           fileOut, swap, dec=".", designPuce, senseStep, sense, statBH) {
+                           fileOut, swap, dec=".", designPuce, senseStep, sense,
+                           statBH, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("exportAnaDiff")}
   # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
   # Args:
   #   exports : liste des noms a mettre dans le nom de fichier a exporter
@@ -316,7 +323,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   return(stat)
 }
 
-.gammeCouleurs <- function() {
+.gammeCouleurs <- function(dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("gammeCouleurs")}
   # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
   # Args:
   #   rien
@@ -335,7 +343,8 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   return(list(bleue=paletteBleue, jaune=paletteJaune, verte=paletteVerte, rouge=paletteRouge, noire=paletteNoire))
 }
 
-inopsisFileDivision <- function() {
+inopsisFileDivision <- function(dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("inopsisFileDivision")}
   cat("\nDivision of the inopsis file for the anaDiffAgilent function\n")
   message <- "Selection du repertoire de travail...\n
   ------------ MESSAGE -------------
@@ -369,8 +378,9 @@ inopsisFileDivision <- function() {
   cat("\nJob is done", "\n")
 }
 
-.kerfdr<-function (pv, fileOut, lambda = seq(0, 0.9, 0.05),
+.kerfdr<-function (pv, fileOut, lambda = seq(0, 0.9, 0.05), dataTest=conf$dataTest,
                    cuts = c(1e-04, 0.001, 0.01, 0.025, 0.05, 0.1)) {
+  if (!is.null(dataTest)) {print("kerfdr")}
   ## script IPS2 (Véronique Brunaud)
   ## modif de la methode storey
   ## inclusion du etape de smoothing
@@ -421,7 +431,8 @@ inopsisFileDivision <- function() {
   return(results)
 }
 
-.look <- function(ratio, stats, seuil) {
+.look <- function(ratio, stats, seuil, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("look")}
   # donne des informations stats : recherche du nombre de bonne stats et ratio associé à la moins bonne
   # Args:
   #   liste numerique des ratios
@@ -436,7 +447,8 @@ inopsisFileDivision <- function() {
   return(list(valeur_minimum=valeur,nombre_de_sondes=nombre))
 }
 
-.mergeAnnot <- function(annotations, tabResult, adresse, senseStep) {
+.mergeAnnot <- function(annotations, tabResult, adresse, senseStep, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("mergeAnnot")}
   # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
   # Args:
   # Returns:
@@ -449,7 +461,8 @@ inopsisFileDivision <- function() {
   return(tabFinal)
 }
 
-.nameFileOut <- function(dirName, swap, dataTest) {
+.nameFileOut <- function(dirName, swap, dataTest, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("nameFileOut")}
   # Genere le nom du fichier out
   # Args:
   #   dirName : dossier d'export pour .writeLineOut
@@ -464,7 +477,8 @@ inopsisFileDivision <- function() {
 }
 
 
-.probeRemoved <- function(tab, norm_intensities, expName, fileOut){
+.probeRemoved <- function(tab, norm_intensities, expName, fileOut, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("probeRemoved")}
   # identifie les sondes ecartees de l'analyse, ajoute les valeur d'intensite et exporte
   # Args:
   #   tab : le tableau de donnee analysees
@@ -487,7 +501,8 @@ inopsisFileDivision <- function() {
 }
 
 
-singleTiffCompilation <- function() {
+singleTiffCompilation <- function(dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("singleTiffCompilation")}
   cat("\nCompilation of raw data files from singleTiff to one multiTiff file\n")
 
   # setwd("~/Bureau/Matthieu/T2/")
@@ -623,7 +638,8 @@ singleTiffCompilation <- function() {
   cat("\n The job is done :)\nThanks for using our tools and citing Sandra Pelletier for this job\n")
 }
 
-.statAnaDiff <- function(MA, swap, export, fileOut, compare) {
+.statAnaDiff <- function(MA, swap, export, fileOut, compare, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("statAnaDiff")}
   # Traitement statistique des donnees
   # Args:
   #   MA : donnees normalisees
@@ -642,7 +658,8 @@ singleTiffCompilation <- function() {
   return(list(tabFit=tabFit, variance=variance))
 }
 
-.statBh <- function(tab, popBH, statBH, fileOut) {
+.statBh <- function(tab, popBH, statBH, fileOut, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("statBh")}
   # selection des meilleurs pval et calcul du BH
   # Args:
   #   tab : tableau de donnees avec pvalue
@@ -661,7 +678,8 @@ singleTiffCompilation <- function() {
   return(tab)
 }
 
-.statBkg <- function(tab, nbg, dirName, fileOut, targets) {
+.statBkg <- function(tab, nbg, dirName, fileOut, targets, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("statBkg")}
   # calcul des intensite par echantillon et soustraction du bruit de fond
   # tri le tableau par probe_id et l'enregistre
   # Args:
@@ -698,7 +716,8 @@ singleTiffCompilation <- function() {
   return(list(tab=tab, stat=stat))
 }
 
-.statWoBkg <- function(tab, targets) {
+.statWoBkg <- function(tab, targets, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("statWoBkg")}
   # calcul des intensite par echantillon et soustraction du bruit de fond
   # tri le tableau par probe_id et l'enregistre
   # Args:
@@ -717,7 +736,8 @@ singleTiffCompilation <- function() {
   return(tab)
 }
 
-.tabColorHexa <- function(tab, statBH) {
+.tabColorHexa <- function(tab, statBH, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("tabColorHexa")}
   # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
   # Args:
   #   rien
@@ -733,7 +753,8 @@ singleTiffCompilation <- function() {
   return(tabColor)
 }
 
-.tabColorWithoutData <- function(tabColor) {
+.tabColorWithoutData <- function(tabColor, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("tabColorWithoutData")}
   # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
   # Args:
   #   tabColor : tableau de couleur apres transformation de tabResult
@@ -760,7 +781,9 @@ singleTiffCompilation <- function() {
   return(matColor)
 }
 
-.tabSAS <- function(annot, tab_sens, tab_antisens, color_sens, color_antisens, sense, expName) {
+.tabSAS <- function(annot, tab_sens, tab_antisens, color_sens, color_antisens, 
+                    sense, expName, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("tabSAS")}
   byY <- ifelse(sense=="sens", "probe.y", "probe.x")
   byX <- ifelse(sense=="sens", "probe.x", "probe.y")
   tab <- merge(tab_sens[,1:6], annot, by.x="probe_id", by.y=byY, all.y=T)
@@ -787,7 +810,9 @@ singleTiffCompilation <- function() {
   return(tab)
 }
 
-.tabSASayane <- function(annot, probeName, tab_sens, tab_antisens, color_sens, color_antisens, statBH, labelling) {
+.tabSASayane <- function(annot, probeName, tab_sens, tab_antisens, color_sens, color_antisens,
+                         statBH, labelling, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("tabSASayane")}
   probeName <- data.frame("ProbeName"=probeName)
   annot$x <- annot$probe.x %in% probeName$ProbeName
   annot$y <- annot$probe.y %in% probeName$ProbeName
@@ -805,10 +830,14 @@ singleTiffCompilation <- function() {
   color_sens <- .tabColorWithoutData(.tabColorHexa(tab_sens, statBH))
   color_antisens <- .tabColorWithoutData(.tabColorHexa(tab_antisens, statBH))
 
-  return(list(annot=annot, color_antisens=color_antisens, color_sens=color_sens, tab_antisens=tab_antisens, tab_sens=tab_sens))
+  return(list(annot=annot, color_antisens=color_antisens, color_sens=color_sens,
+              tab_antisens=tab_antisens, tab_sens=tab_sens))
 }
 
-.transformBh <- function(bh, gammeBleue=.gammeCouleurs()$bleue, valeurZero=.gammeCouleurs()$noire) {
+.transformBh <- function(bh, dataTest=conf$dataTest, 
+                         gammeBleue=.gammeCouleurs()$bleue, 
+                         valeurZero=.gammeCouleurs()$noire) {
+  if (!is.null(dataTest)) {print("transformBh")}
   # renvoi le code couleur en fonction de la valeur du BH
   # Args:
   #   bh : valeur a transformer
@@ -825,7 +854,10 @@ singleTiffCompilation <- function() {
   return(cBh)
 }
 
-.transformInt <- function(int, gammeJaune=.gammeCouleurs()$jaune, valeurZero=.gammeCouleurs()$noire) {
+.transformInt <- function(int, dataTest=conf$dataTest,
+                          gammeJaune=.gammeCouleurs()$jaune,
+                          valeurZero=.gammeCouleurs()$noire) {
+  if (!is.null(dataTest)) {print("transformInt")}
   # renvoi le code couleur en fonction de la valeur de l'intensite
   # Args:
   #   int : intensite a transformer
@@ -845,7 +877,10 @@ singleTiffCompilation <- function() {
   return(cInt)
 }
 
-.transformPval <- function(pval, gammeBleue=.gammeCouleurs()$bleue, valeurZero=.gammeCouleurs()$noire) {
+.transformPval <- function(pval, dataTest=conf$dataTest,
+                           gammeBleue=.gammeCouleurs()$bleue,
+                           valeurZero=.gammeCouleurs()$noire) {
+  if (!is.null(dataTest)) {print("transformPval")}
   # renvoi le code couleur en fonction de la valeur de la pvalue
   # Args:
   #   pval : valeur a transformer
@@ -862,7 +897,8 @@ singleTiffCompilation <- function() {
   return(cPval)
 }
 
-.transformRat <- function(rat) {
+.transformRat <- function(rat, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("transformRat")}
   # renvoi le code couleur en fonction de la valeur du ratio
   # les ratios s'interpretent sur une gamme logarithmique, la correspondance n'est pas lineaire
   # Args:

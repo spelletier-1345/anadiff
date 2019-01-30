@@ -3,8 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.plotSpikes <- function(spikesTab, indNbCol, nbCol, minSpikes, maxSpikes, dataTest=NULL) {
-  if (is.null(dataTest)) {print("plotSpikes")}
+.plotSpikes <- function(spikesTab, indNbCol, nbCol, minSpikes, maxSpikes, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("plotSpikes")}
   # Graph Spikes
   plot(spikesTab$expect, spikesTab[,indNbCol*2+1], xlim=c(-4,round(maxSpikes+0.5)),
        ylim=c(round(minSpikes-0.5),round(maxSpikes+0.5)), pch = "*", col = "purple",

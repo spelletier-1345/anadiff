@@ -3,8 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.RG4Graph <- function(RG, labelling, dirName, dataTest=NULL) {
-  if (is.null(dataTest)) {print("RG4Graph")}
+.RG4Graph <- function(RG, labelling, dirName, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("RG4Graph")}
   # Transformation de RG en MA
   MA <- normalizeWithinArrays(RG,method="loess",bc.method="none")
   # Récupération des données de RG et MA en data.frame

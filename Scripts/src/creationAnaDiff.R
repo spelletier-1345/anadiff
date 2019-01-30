@@ -3,7 +3,7 @@
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.creationAnaDiff <- function(dataTest=NULL, designPuce, swap, labelling) { #valide
+.creationAnaDiff <- function(dataTest=conf$dataTest, designPuce, swap, labelling) { #valide
   # Creation du dossier AnaDiff et du fichier out
   # Args:
   #   rien
@@ -14,7 +14,7 @@
   #   defini le dossier de travail
   # Returns:
   #   rien
-  if (is.null(dataTest)) {print("")}
+  if (!is.null(dataTest)) {print("")}
   dirName <- paste("AnaDiff_", swap, sep="")
   if (!is.null(dataTest)) {
     dirName <- paste(paste(dataTest, "AnaDiff", sep=""),designPuce,labelling,sep="_")

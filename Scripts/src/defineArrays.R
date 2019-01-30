@@ -3,7 +3,7 @@
 # Le 9 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.defineArrays <- function(dirName, fileOut, fileArray, dataTest=NULL) {
+.defineArrays <- function(dirName, fileOut, fileArray, dataTest=conf$dataTest) {
   # Ouverture et modif du fichier arrays.txt
   # Args:
   #   dirName : dossier d'export pour .writeLineOut
@@ -13,7 +13,7 @@
   #   exporte le tableau arrays dans le fichier Out
   # Returns:
   #   le tableau arrays
-  if (is.null(dataTest)) {print("defineArrays")}
+  if (!is.null(dataTest)) {print("defineArrays")}
   path <- ifelse(!is.null(dataTest), dataTest, ".")
   fileListe <- list.files(path = path, pattern = ("_[[:digit:]]+_[[:digit:]]+.txt$"))
   arrays <- read.table(paste(path, fileArray, sep="/"), header=T, encoding="utf-8")

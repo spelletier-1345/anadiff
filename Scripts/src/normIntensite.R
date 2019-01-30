@@ -3,7 +3,7 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.normIntensite <- function(MA, tab, expName, probe, dataTest=NULL) {
+.normIntensite <- function(MA, tab, expName, probe, dataTest=conf$dataTest) {
   # Recupere les intensites normalisees par echantillon hybride et les exporte
   # Args:
   #   MA : Le tableau general après normalisation
@@ -11,7 +11,7 @@
   #   swap : le nom du swap
   # Returns:
   #   le tableau des intensites normalisees
-  if (is.null(dataTest)) {print("normIntensite")}
+  if (!is.null(dataTest)) {print("normIntensite")}
   cat("recuperation des intensites normalisees individuelles...\n")
   RGnorm <- RG.MA(MA)    # Retransformer les donnees MA en RG (non log2)
   norm_intensities <- data.frame (RGnorm$genes$ProbeName,log2(RGnorm$R),log2(RGnorm$G))

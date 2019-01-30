@@ -3,8 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.plotRGMA <- function(RGMAtab, indNbCol, nbCol, state, dataTest=NULL) {
-  if (is.null(dataTest)) {print("plotRGMA")}
+.plotRGMA <- function(RGMAtab, indNbCol, nbCol, state, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("plotRGMA")}
   indNbCol <- indNbCol+3
   if (state == "RG") {
     mainState="Graphe RG avant normalisation par loess"

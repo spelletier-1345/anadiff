@@ -3,8 +3,8 @@
 # Le 23 janvier 2018 - Sandra PELLETIER
 ###############################################
 
-.tabSpikes <- function(spikesTab, indNbCol, nbCol, dataTest=NULL) {
-  if (is.null(dataTest)) {print("tabSpikes")}
+.tabSpikes <- function(spikesTab, indNbCol, nbCol, dataTest=conf$dataTest) {
+  if (!is.null(dataTest)) {print("tabSpikes")}
   spikesTab <- spikesTab[order(spikesTab$expect, decreasing = T),]
   par(mar=c(0.5, 0, 0.5, 0))
   plot(0, type = "n", ylim = c(0.1, 4), xlim = c(0.1, 4), axes = F, ann = F)

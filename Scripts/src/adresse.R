@@ -5,8 +5,8 @@
 
 # Les données de test et les données de conf (annot, ...) sont dans le mnt/projects
 
-.adresse <- function(dataTest = NULL) {
-  if (is.null(dataTest)) {print(".adresse")}
+.adresse <- function(dataTest = conf$dataTest) {
+  if (!is.null(dataTest)) {print(".adresse")}
   if (is.null(dataTest)) {
     adresse <- "http://pegasus-bioinfo.angers-nantes.inra.fr/rscripts/Tools/Agilent/" # TODO
   } else {
