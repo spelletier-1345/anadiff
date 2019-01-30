@@ -19,11 +19,13 @@ swap$alerte <- data.frame(matrix(vector(),nrow=0, ncol=6,
                                  dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
 
 # Graph, et soumission Geo
-rg4graph <- .RG4Graph(RG=swap$RG, labelling=data$labelling, dirName=swap$dirName, dataTest=conf$dataTest)
-expInt <- .nomFichier("geoSubmission.txt", paste(swap$dirName, "qualityControl_geoSubmission/", sep=""),
-                      swap$swap, export="")
-geo <- .normIntensite(rg4graph, "", expInt, "")
-rm(rg4graph, expInt, geo)
+if (conf$graph) {
+  rg4graph <- .RG4Graph(RG=swap$RG, labelling=data$labelling, dirName=swap$dirName, dataTest=conf$dataTest)
+  expInt <- .nomFichier("geoSubmission.txt", paste(swap$dirName, "qualityControl_geoSubmission/", sep=""),
+                        swap$swap, export="")
+  geo <- .normIntensite(rg4graph, "", expInt, "")
+  rm(rg4graph, expInt, geo)
+}
 
 # JSON
 swap$json <- list(swap=list(

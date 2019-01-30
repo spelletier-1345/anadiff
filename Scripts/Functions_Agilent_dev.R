@@ -46,12 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-      tabResult$probe_id <- tabResult$Agilent_id
-      tabResultComplet <- tabResult
-      statBkg <- .statBkg(tabResult, nbg = 8000, dirNameOut,
-                          fileOut, targets = MA$targets)
-      tabResult <- statBkg$tab
-      tabResult <- .statBh(tabResult, popBH, statBH, fileOut)
       if (bkgCalculation==F) {
         tabWBkg <- .statWoBkg(tabResultComplet, targets = MA$targets)
         tabResultWBkg <- tabResult
