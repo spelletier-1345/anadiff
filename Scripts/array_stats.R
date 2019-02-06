@@ -19,4 +19,9 @@ if (!data$bkgCalculation) {
   rm(tabWoBkg, tabFinalWoBkg, tabResultWoBkg)
 }
 
-print("ok 30/01/2019")
+sens$normIntensities <- .normIntensite(sens$normalize$MA, sens$tabResultComplet, sens$expName$normI, export$probe)
+.bkgIntensite(sens$normIntensities, as.numeric(export$nbg), sens$expName$bkgI)
+
+
+
+print("ok 06/02/2019")

@@ -46,8 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-      normIntensities <- .normIntensite(MA, tab = tabResultComplet, expName$normI, probe=probe)
-      .bkgIntensite(normIntensities, nbg = as.numeric(nbg), expName)
       pr <- .probeRemoved(tab = tabResult, normIntensities, expName, fileOut)
       stat <- .exportAnaDiff(export = export, genome = genome, probe = probe,
                              tabResult = tabResult, adresse = adresse, expName = expName,
