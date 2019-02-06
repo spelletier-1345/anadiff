@@ -1,15 +1,18 @@
 ###############################################
 # AnaDiff Agilent
 # Données d'un swap
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
-# JSON
-swap$json <- list(swap=list(
-  name=swap$swap,
-  design=data$designPuce,
-  labelling=data$labelling,
-  exports=data$exports,
-  fileArray=swap$arrays[,1:4],
-  ctrlName=swap$arrays$CtrName[1],
-  ttmtName=swap$arrays$TtmtName[1]))
+swap$json[[ex]][[sens$sensLabel]] <- list(var = sens$normalize$var,
+                                         remove = sens$probesRemoved,
+                                         stat = sens$stat,
+                                         bkg = sens$statBkg$stat)
+
+swap$json[[ex]][[sens$sensLabel]]$"Int" <- list(ctrl=list(min=min(sens$normalize$tabResult$cont.bg),
+                                                          mean=mean(sens$normalize$tabResult$cont.bg),
+                                                          med=median(sens$normalize$tabResult$cont.bg)),
+                                                ttmt=list(min=min(sens$normalize$tabResult$ttmt.bg),
+                                                          mean=mean(sens$normalize$tabResult$ttmt.bg),
+                                                          med=median(sens$normalize$tabResult$ttmt.bg),
+                                                          max=max(sens$normalize$tabResult$ttmt.bg)))

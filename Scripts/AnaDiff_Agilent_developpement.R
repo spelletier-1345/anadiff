@@ -86,13 +86,13 @@ ex <- data$exports[1]
 source("./array_export.R")
 
 # sens
-# for (senseStep in c("sens", "antisens")) {
-se <- "sens"
-source("./array_sens.R")
-source("./array_stats.R")
-
-if (conf$db) {source("./array_json4db.R")}
-
+for (se in c("sens", "antisens")) {
+  # se <- "sens"
+  source("./array_sens.R")
+  source("./array_stats.R")
+  if (conf$db) {source("./array_json4db.R")}
+  source("./array_json4db.R")
+}
 
 
 print("done")

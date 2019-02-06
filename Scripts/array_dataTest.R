@@ -18,4 +18,4 @@ data$swaps <- paste(unique(data$arraysTxt$Swaps))
 data$designList <- .designVersion(data$designPuce, conf$adresse)
 data$exports = data$designList$export
 data$alertes <- data.frame(matrix(vector(),nrow=0, ncol=6, 
-                                  dimnames=list(c(),c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))
+                                  dimnames=list(c(), c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))

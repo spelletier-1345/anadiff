@@ -46,28 +46,8 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-      stat <- .exportAnaDiff(export = export, genome = genome, probe = probe,
-                             tabResult = tabResult, adresse = adresse, expName = expName,
-                             fileOut, swap = swap, dec = dec, designPuce, senseStep, sense, statBH) # !! senseStep ET sense ?
-      json[[export]][[sense]] <- list(var = res$variance, remove=pr, stat=stat, bkg=statBkg$stat)
-      json[[export]][[sense]][["Int"]] <- list(ctrl=list(min=min(tabResult[,2]),
-                                                         mean=mean(tabResult[,2]),
-                                                         med=median(tabResult[,2]),
-                                                         max=max(tabResult[,2])),
-                                               ttmt=list(min=min(tabResult[,3]),
-                                                         mean=mean(tabResult[,3]),
-                                                         med=median(tabResult[,3]),
-                                                         max=max(tabResult[,3])))
-      alerte[(nrow(alerte)+1),] <- c(swap, export, sense, res$variance, pr, stat$pval[[2]])
-    }
+    
     if (designPuce == "70158" | designPuce == "70465") { # Cas particulier pour AryANE_v2
-      tabAryANE <- .tabSASayane(annot, probeName=RG$genes$ProbeName, tab_sens, tab_antisens,
-                                color_sens, color_antisens, statBH, labelling)
-      annot <- tabAryANE$annot
-      tab_sens <- tabAryANE$tab_sens
-      tab_antisens <- tabAryANE$tab_antisens
-      color_sens <- tabAryANE$color_sens
-      color_antisens <- tabAryANE$color_antisens
     }
     tabDouble <- .tabSAS(annot, tab_sens, tab_antisens, color_sens, color_antisens, sense, expName)
     name <- paste(swap, export, sep="_")
