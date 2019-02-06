@@ -17,9 +17,9 @@ rm(list=ls(all.names = TRUE))
 source("./src/adresse.R")
 source("./src/verifPackages.R")
 source("./src/selectionDossier.R")
-# Possibilité de modifier le fichier de designSpeificities.txt
-# pendant le développement (dataTest=TRUE) : 
-# Créer un nouveau fichier et le renseigner dans le source suivant
+# Possibilité de modifier le fichier de designSpecificities.txt
+#   pendant le développement (dataTest=TRUE) : 
+# Pour cela, créer un nouveau fichier et le renseigner dans le source suivant
 source("./src/designVersion.R")
 source("./src/creationAnaDiff.R")
 source("./src/writeLineOut.R")
@@ -91,8 +91,9 @@ for (se in c("sens", "antisens")) {
   source("./array_sens.R")
   source("./array_stats.R")
   if (conf$db) {source("./array_json4db.R")}
-  source("./array_json4db.R")
 }
+
+source("./array_exeptions.R")
 
 
 print("done")

@@ -47,8 +47,6 @@ designPuce <- "85372" # Medicago v1
 #### Pas à pas ####
 
     
-    if (designPuce == "70158" | designPuce == "70465") { # Cas particulier pour AryANE_v2
-    }
     tabDouble <- .tabSAS(annot, tab_sens, tab_antisens, color_sens, color_antisens, sense, expName)
     name <- paste(swap, export, sep="_")
     assign(name, tabDouble, envir=globalenv())

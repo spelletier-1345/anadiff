@@ -252,23 +252,6 @@ inopsisFileDivision <- function(dataTest=conf$dataTest) {
   cat("\nJob is done", "\n")
 }
 
-.nameFileOut <- function(dirName, swap, dataTest, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("nameFileOut")}
-  # Genere le nom du fichier out
-  # Args:
-  #   dirName : dossier d'export pour .writeLineOut
-  # Returns:
-  #   fileOut : le nom du fichier out
-  if (dataTest == TRUE) {
-    fileOut <- paste(dirName, "AnaDiff", swap, "out.txt", sep="_")
-  } else {
-    fileOut <- paste(dirName, "AnaDiff", swap, Sys.Date(), "out.txt", sep="_")
-  }
-  return(fileOut)
-}
-
-
-
 
 singleTiffCompilation <- function(dataTest=conf$dataTest) {
   if (!is.null(dataTest)) {print("singleTiffCompilation")}
@@ -437,30 +420,5 @@ singleTiffCompilation <- function(dataTest=conf$dataTest) {
   write.table(tf, expName$colDble, row.names=F, col.names=F, quote=F)
   return(tab)
 }
-
-.tabSASayane <- function(annot, probeName, tab_sens, tab_antisens, color_sens, color_antisens,
-                         statBH, labelling, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("tabSASayane")}
-  probeName <- data.frame("ProbeName"=probeName)
-  annot$x <- annot$probe.x %in% probeName$ProbeName
-  annot$y <- annot$probe.y %in% probeName$ProbeName
-  annot$xy <- annot$x + annot$y
-  annot <- annot[which(annot$xy==2), 1:2]
-
-  if (labelling=="direct") {
-    tab_sens <- tab_sens[which(tab_sens$probe_id %in% annot$probe.x),]
-    tab_antisens <- tab_antisens[which(tab_antisens$probe_id %in% annot$probe.y),]
-  } else {
-    tab_sens <- tab_sens[which(tab_sens$probe_id %in% annot$probe.y),]
-    tab_antisens <- tab_antisens[which(tab_antisens$probe_id %in% annot$probe.x),]
-  }
-
-  color_sens <- .tabColorWithoutData(.tabColorHexa(tab_sens, statBH))
-  color_antisens <- .tabColorWithoutData(.tabColorHexa(tab_antisens, statBH))
-
-  return(list(annot=annot, color_antisens=color_antisens, color_sens=color_sens,
-              tab_antisens=tab_antisens, tab_sens=tab_sens))
-}
-
 
 
