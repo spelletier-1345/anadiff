@@ -23,5 +23,9 @@ sens$normIntensities <- .normIntensite(sens$normalize$MA, sens$tabResultComplet,
 .bkgIntensite(sens$normIntensities, as.numeric(export$nbg), sens$expName$bkgI)
 sens$probesRemoved <- .probeRemoved(sens$normalize$tabResult, sens$normIntensities, sens$expName$removed, swap$fileOut)
 
+sens$stat <- .exportAnaDiff(export$annot, sens$normalize$tabResult, conf$adresse, sens$expName$texte, sens$expName$htmlC,
+                       swap$fileOut, se, sens$sensLabel, data$statBH) # !! senseStep ET sense
+
+
 
 print("ok 06/02/2019")

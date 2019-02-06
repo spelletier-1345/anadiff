@@ -217,90 +217,6 @@ anaDiffAgilent <- function(designPuce, labelling, dec = ".", popBH="alternate", 
   }
 }
 
-.exportAnaDiff <- function(export, genome, probe, tabResult, adresse, expName,
-                           fileOut, swap, dec=".", designPuce, senseStep, sense,
-                           statBH, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("exportAnaDiff")}
-  # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
-  # Args:
-  #   exports : liste des noms a mettre dans le nom de fichier a exporter
-  #   genomes : liste des noms de fichier de reference du genome a ouvrir et ayant les annotations
-  #   tabResult : tableau de resultat a merger avec le tableau d'annotation, a colorer et exporter
-  # CeQuIlFait :
-  #   tabFinal : tableau de resultats merger avec les annotations
-  #   tabColor : tableau de resultats transforme en couleur
-  #   export de ces tableaux
-
-  tabResult$sense <- sense
-  tabFinal <- .mergeAnnot(annotations = genome, tabResult = tabResult, adresse = adresse, senseStep)
-  if (nrow(tabFinal)!=nrow(tabResult) & sum((is.na(tabFinal$ratio)))!=0) {
-    tabFinal <- tabFinal[-which(is.na(tabFinal$ratio)),]
-    test <- tabFinal[-which(is.na(tabFinal$ratio)),]
-  }
-  tabFinal <- tabFinal[order(tabFinal$probe_id),]
-  write.table(tabFinal,expName$texte,row.names=F,col.names=T,quote=F,sep="\t",dec=dec)
-  name <- paste("tab", sense, sep="_")
-  assign(name, tabFinal, envir=globalenv())
-
-  tabColor <- .tabColorHexa(tabFinal, statBH)
-  tabColorExport <- .tabColorWithoutData(tabColor) # .tabColorWithData voir v3
-  write.table(tabColorExport,expName$htmlC,row.names=F,col.names=F,quote=F)
-  name <- paste("color", sense, sep="_")
-  assign(name, tabColorExport, envir=globalenv())
-
-  ### Quelques stats ###
-
-  stat <- list()
-  stat[["pval"]] <- .look(tabFinal$ratio,tabFinal$pvalue,0.01)
-  stat[["BH"]] <- .look(tabFinal$ratio,tabFinal$BH,0.05)
-  .writeLineOut("\nNombre de sondes significativement differentiellement exprimées a :",fileOut)
-  .writeLineOut(paste("     1%  par p.value   :",stat$pval[[2]]),fileOut)
-  .writeLineOut(paste("     5% par BH :",stat$BH[[2]]),fileOut)
-  .writeLineOut(paste("\nValeur du ratio avec pval 1%   : ",stat$pval[[1]]),fileOut)
-  .writeLineOut(paste("Valeur du ratio avec BH 5%  : ",stat$BH[[1]],"\n"),fileOut)
-
-  express <- nrow(tabFinal[which(tabFinal[,2]>=0.5|tabFinal[,3]>=0.5),])
-  .writeLineOut(paste("Nombre de sondes exprimées avec Int > 0.5 :",express),fileOut)
-  pourcent <- round(express*100/nrow(tabFinal),0)
-  .writeLineOut(paste("     soit :",pourcent,"% des sondes présentes (total :",nrow(tabFinal),"sondes)\n"),fileOut)
-  stat[["express"]][["intSup05"]] <- list(express=express, pourcent=pourcent)
-
-  express <- nrow(tabFinal[which(tabFinal[,2]>=1|tabFinal[,3]>=1),])
-  .writeLineOut(paste("Nombre de sondes exprimées avec Int > 1 :",express),fileOut)
-  pourcent <- round(express*100/nrow(tabFinal),0)
-  .writeLineOut(paste("     soit :",pourcent,"% des sondes présentes (total :",nrow(tabFinal),"sondes)"),fileOut)
-  stat[["express"]][["intSup1"]] <- list(express=express, pourcent=pourcent)
-  stat[["express"]][["total"]] <- nrow(tabFinal)
-
-  resume <- summary(tabFinal[,2:3])[c(1,3,4,6),]
-  resume <- rbind(colnames(resume),resume)
-  resume <- apply(resume, 2, format)
-  .writeLineOut("\nIntensite des echantillons dans ce swap pour ce genome :",fileOut)
-  write.table(resume,fileOut,append=TRUE, quote=FALSE, row.names=FALSE, col.names=FALSE)
-  print(resume[-1,],quote=F)
-  return(stat)
-}
-
-.gammeCouleurs <- function(dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("gammeCouleurs")}
-  # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
-  # Args:
-  #   rien
-  # Returns:
-  #   liste de vecteurs :
-  #   - bleu  :  4 couleurs
-  #   - jaune :  9 couleurs
-  #   - vert  : 10 couleurs
-  #   - rouge : 10 couleurs
-  #   - noir  :  1 couleur
-  paletteBleue <- colorRampPalette(c("#0000FF","#79F8F8"))(4)
-  paletteJaune <- colorRampPalette(c("#3A3A00","#C5C500","#E6E600","#FFFF66"))(9)
-  paletteVerte <- colorRampPalette(c("#11391E","#00FF00"))(10)
-  paletteRouge <- colorRampPalette(c("#430000","#FE0000"))(10)
-  paletteNoire <- "#000000"
-  return(list(bleue=paletteBleue, jaune=paletteJaune, verte=paletteVerte, rouge=paletteRouge, noire=paletteNoire))
-}
-
 inopsisFileDivision <- function(dataTest=conf$dataTest) {
   if (!is.null(dataTest)) {print("inopsisFileDivision")}
   cat("\nDivision of the inopsis file for the anaDiffAgilent function\n")
@@ -334,22 +250,6 @@ inopsisFileDivision <- function(dataTest=conf$dataTest) {
     write.table(files[[i]], fileName, quote=F, sep="\t", row.names=F, col.names=F, dec=".", append=T) # Valeurs
   }
   cat("\nJob is done", "\n")
-}
-
-.look <- function(ratio, stats, seuil, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("look")}
-  # donne des informations stats : recherche du nombre de bonne stats et ratio associé à la moins bonne
-  # Args:
-  #   liste numerique des ratios
-  #   liste numerique des stats
-  # Returns:
-  #   liste : ratio minimum et nombre de genes diff
-  valmini  <- stats[stats<=seuil]                   # liste des valeurs de stats inferieures au seuil
-  valmax   <- max(valmini)                          # valeur de stats exact immediatement inferieure au seuil
-  valcible <- ratio[which(stats<=valmax)]           # liste des ratios dont stats est inferieures au seuil
-  nombre   <- length(valcible)                      # nombre de sondes dont stats est inferieures au seuil
-  valeur   <- min(abs(valcible))                    # valeur du plus petit ratio (en absolu) correspondant au seuil
-  return(list(valeur_minimum=valeur,nombre_de_sondes=nombre))
 }
 
 .nameFileOut <- function(dirName, swap, dataTest, dataTest=conf$dataTest) {
@@ -507,50 +407,7 @@ singleTiffCompilation <- function(dataTest=conf$dataTest) {
   cat("\n The job is done :)\nThanks for using our tools and citing Sandra Pelletier for this job\n")
 }
 
-.tabColorHexa <- function(tab, statBH, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("tabColorHexa")}
-  # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
-  # Args:
-  #   rien
-  # Returns:
-  #   rien
-  gamme <- .gammeCouleurs()
-  tabColor <- tab[,2:6]
-  tabColor[,1]    <- sapply(tab[,2],    .transformInt,  gammeJaune=gamme$jaune, valeurZero=gamme$noire)
-  tabColor[,2]    <- sapply(tab[,3],    .transformInt,  gammeJaune=gamme$jaune, valeurZero=gamme$noire)
-  tabColor$ratio  <- sapply(tab$ratio,  .transformRat)
-  tabColor$pvalue <- sapply(tab$pvalue, .transformPval, gammeBleue=gamme$bleue, valeurZero=gamme$noire)
-  tabColor[[statBH]]<- sapply(tab[[statBH]], .transformBh, gammeBleue=gamme$bleue, valeurZero=gamme$noire)
-  return(tabColor)
-}
 
-.tabColorWithoutData <- function(tabColor, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("tabColorWithoutData")}
-  # cree une liste de vecteur de code couleur hexadecimal pour chaque gamme
-  # Args:
-  #   tabColor : tableau de couleur apres transformation de tabResult
-  # Returns:
-  #   rien
-  element1 <- "<tr><td>"
-  element2 <- "</td><td align=\"center\" bgcolor=\""
-  element3 <- "\">"
-  element4 <- "</td><td>"
-  element5 <- "</td></tr>"
-
-  matColor <- matrix(nrow=nrow(tabColor)+3, ncol=1)
-  matColor[1,1] <- "<table>"
-  matColor[2,1] <- "<tr></tr>"
-  matColor[3:(nrow(tabColor)+2),] <- matrix(paste(element1,
-                                                  element2,tabColor[,1],element3,
-                                                  element2,tabColor[,2],element3,
-                                                  element2,tabColor[,3],element3,
-                                                  element2,tabColor[,4],element3,
-                                                  element2,tabColor[,5],element3,
-                                                  element5,
-                                                  sep=""),ncol=1)
-  matColor[(nrow(tabColor)+3),1] <- "</table>"
-  return(matColor)
-}
 
 .tabSAS <- function(annot, tab_sens, tab_antisens, color_sens, color_antisens, 
                     sense, expName, dataTest=conf$dataTest) {
@@ -605,90 +462,5 @@ singleTiffCompilation <- function(dataTest=conf$dataTest) {
               tab_antisens=tab_antisens, tab_sens=tab_sens))
 }
 
-.transformBh <- function(bh, dataTest=conf$dataTest, 
-                         gammeBleue=.gammeCouleurs()$bleue, 
-                         valeurZero=.gammeCouleurs()$noire) {
-  if (!is.null(dataTest)) {print("transformBh")}
-  # renvoi le code couleur en fonction de la valeur du BH
-  # Args:
-  #   bh : valeur a transformer
-  #   gammeBleue : vecteur de 4 couleurs dans le bleu
-  #   valeurZero : valeur pour une intensite nulle
-  # Returns:
-  #   le code couleur hexadécimal correspondant
-  if      (is.na(bh))    {cBh <- "#a0a0a0"}
-  else if (bh < 0.00001) {cBh <- gammeBleue[4]}
-  else if (bh < 0.01)    {cBh <- gammeBleue[3]}
-  else if (bh < 0.05)    {cBh <- gammeBleue[2]}
-  else if (bh < 0.1)     {cBh <- gammeBleue[1]}
-  else                   {cBh <- valeurZero}
-  return(cBh)
-}
-
-.transformInt <- function(int, dataTest=conf$dataTest,
-                          gammeJaune=.gammeCouleurs()$jaune,
-                          valeurZero=.gammeCouleurs()$noire) {
-  if (!is.null(dataTest)) {print("transformInt")}
-  # renvoi le code couleur en fonction de la valeur de l'intensite
-  # Args:
-  #   int : intensite a transformer
-  #   gammeJaune : vecteur de 9 couleurs dans le jaune
-  #   valeurZero : valeur pour une intensite nulle
-  # CeQuIlFait:
-  #   la valeur est arrondie et bornee entre 0 et 9
-  # Returns:
-  #   le code couleur hexadécimal correspondant
-  if (is.na(int)) {cInt <- "#a0a0a0"}
-  else {
-    int <- round(int)
-    int[which(int<0)] <- 0 ; int[which(int>9)] <- 9
-    cInt <- ""
-    ifelse (int==0, cInt <- valeurZero , cInt <- gammeJaune[int])
-  }
-  return(cInt)
-}
-
-.transformPval <- function(pval, dataTest=conf$dataTest,
-                           gammeBleue=.gammeCouleurs()$bleue,
-                           valeurZero=.gammeCouleurs()$noire) {
-  if (!is.null(dataTest)) {print("transformPval")}
-  # renvoi le code couleur en fonction de la valeur de la pvalue
-  # Args:
-  #   pval : valeur a transformer
-  #   gammeBleue : vecteur de 4 couleurs dans le bleu
-  #   valeurZero : valeur pour une intensite nulle
-  # Returns:
-  #   le code couleur hexadécimal correspondant
-  if      (is.na(pval))    {cPval <- "#a0a0a0"}
-  else if (pval < 0.00001) {cPval <- gammeBleue[4]}
-  else if (pval < 0.001)   {cPval <- gammeBleue[3]}
-  else if (pval < 0.01)    {cPval <- gammeBleue[2]}
-  else if (pval < 0.05)    {cPval <- gammeBleue[1]}
-  else                     {cPval <- valeurZero}
-  return(cPval)
-}
-
-.transformRat <- function(rat, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("transformRat")}
-  # renvoi le code couleur en fonction de la valeur du ratio
-  # les ratios s'interpretent sur une gamme logarithmique, la correspondance n'est pas lineaire
-  # Args:
-  #   rat : valeur du ratio a transformer
-  # Returns:
-  #   le code couleur hexadécimal correspondant
-  if      (is.na(rat))   {cRat <- "#a0a0a0"}
-  else if (rat < (-3))   {cRat <- "#00ff00"}
-  else if (rat < (-1.5)) {cRat <- "#00aa00"}
-  else if (rat < (-1))   {cRat <- "#006600"}
-  else if (rat < (-0.5)) {cRat <- "#003300"}
-  else if (rat < 0)      {cRat <- "#001100"}
-  else if (rat == 0)     {cRat <- "#000000"}
-  else if (rat < 0.5)    {cRat <- "#110000"}
-  else if (rat < 1)      {cRat <- "#330000"}
-  else if (rat < 1.5)    {cRat <- "#770000"}
-  else if (rat < 3)      {cRat <- "#aa0000"}
-  else                   {cRat <- "#ff0000"}
-  return(cRat)
-}
 
 
