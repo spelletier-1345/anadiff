@@ -1,24 +1,25 @@
 ###############################################
-# Script de développement pour AnaDiff Agilent
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Script de développement pour AnaDiff IRHS
+# Le 9 janvier 2019 - Sandra PELLETIER
 #
 # - Chargement des fonctions
 # - Chargement des données de configuration
 # - Chargement des données de test
+# - Analyse par swap
+# - Analyse par génome (export)
+# - Analyse par sens de sonde (sens/antisens)
+# - Gestion des exceptions
 #
 ###############################################
 
 rm(list=ls(all.names = TRUE))
-
-# source des fonctions précédentes
-# source("./Functions_Agilent_v4.1.R")
 
 # source des fonctions (mises à jour)
 source("./src/adresse.R")
 source("./src/verifPackages.R")
 source("./src/selectionDossier.R")
 # Possibilité de modifier le fichier de designSpecificities.txt
-#   pendant le développement (dataTest=TRUE) : 
+#   pendant le développement (dataTest=TRUE) :
 # Pour cela, créer un nouveau fichier et le renseigner dans le source suivant
 source("./src/designVersion.R")
 source("./src/creationAnaDiff.R")
@@ -64,15 +65,17 @@ source("./src/look.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest
+# TODO : fichier de configuration
 source("./array_conf.R")
 
 # source des données de travail
-# Modification possibles : 
+# Modification possibles :
 # - numéro de design
 # - labelling
 source("./array_dataTest.R")
 
 # Analyse des données
+#####################
 
 # swap
 # for (swap in swaps) {

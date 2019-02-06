@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 # Séparation des sens puis normalisation des sens uniquement

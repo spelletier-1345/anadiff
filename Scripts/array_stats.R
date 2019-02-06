@@ -1,7 +1,7 @@
 ###############################################
 # AnaDiff Agilent
 # stats bkg, fdr et normalisation pour un sens
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 sens$statBkg <- .statBkg(sens$normalize$tabResult, export$nbg, swap$fileOut, targets = sens$normalize$MA$targets)

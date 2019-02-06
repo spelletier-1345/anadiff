@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .statBkg <- function(tab, nbg, fileOut, targets, dataTest=conf$dataTest) {
@@ -21,7 +21,7 @@
   IRed   <- tab$Amean + tab$ratio/2
   bkgRed  <- .calcBkg(IRed,nbg)
   IRedBkg <- round(IRed - bkgRed$background,2)
-  
+
   stat <- list(ctrl=list(mean=round(bkgGreen$moyenne,4),
                          dev=round(bkgGreen$ecarttype,4),
                          bkg=round(bkgGreen$background,4)),
@@ -33,7 +33,7 @@
   .writeLineOut(paste("moyenne   \t",round(bkgGreen$moyenne,4),"\t",round(bkgRed$moyenne,4)), fileOut)
   .writeLineOut(paste("ecart-type\t",round(bkgGreen$ecarttype,4),"\t",round(bkgRed$ecarttype,4)), fileOut)
   .writeLineOut(paste("background\t",round(bkgGreen$background,4),"\t",round(bkgRed$background,4)), fileOut)
-  
+
   cat("\nsoustraction du bruit de fond dans le tableau de donnees...\n")
   tab <- data.frame(tab[,1],IGreenBkg,IRedBkg,round(tab[,3:4],4))
   names(tab)[1:3] <- c("probe_id", paste(targets$CtrName[1],".bg",sep=""), paste(targets$TtmtName[1],".bg",sep=""))

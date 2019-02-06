@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .writeLineOut <- function(lineOut, fileOut, dataTest=conf$dataTest) { #valide

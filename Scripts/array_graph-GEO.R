@@ -1,7 +1,7 @@
 ###############################################
 # AnaDiff Agilent
 # Données d'un swap
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 # Graph, et soumission Geo

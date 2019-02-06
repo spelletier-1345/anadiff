@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 23 janvier 2018 - Sandra PELLETIER
+# Le 23 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .exportQCArray <- function(chip, smoothScatterRG, smoothScatterMA, histRG, histMA,

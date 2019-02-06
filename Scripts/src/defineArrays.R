@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .defineArrays <- function(dirName, fileOut, fileArray, dataTest=conf$dataTest) {

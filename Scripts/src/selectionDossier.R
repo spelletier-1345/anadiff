@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .selectionDossier <- function(inviteDossier=NULL, dataTest=conf$dataTest) {

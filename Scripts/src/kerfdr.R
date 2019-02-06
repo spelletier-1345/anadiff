@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .kerfdr<-function (pv, fileOut, lambda = seq(0, 0.9, 0.05), dataTest=conf$dataTest,

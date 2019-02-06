@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 30 janvier 2018 - Sandra PELLETIER
+# Le 30 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .mergeAnnot <- function(tabResult, annot, sens, dataTest=conf$dataTest) {

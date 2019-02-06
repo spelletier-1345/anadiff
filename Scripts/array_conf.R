@@ -1,13 +1,13 @@
 ###############################################
 # AnaDiff Agilent
 # Données de configuration
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 conf  <- c()
 
 conf$dataTest <- NULL
-conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/" 
+conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
 conf$graph <- FALSE
 conf$db <- FALSE
 
@@ -17,4 +17,3 @@ conf$localOpt <- options() ; options(warn=-1)
 conf$pck <- c("limma", "httr", "jsonlite")
 conf$verifPackage <- .verifPackages(conf$pck)!=0
 conf$folderArray <- .selectionDossier()
-

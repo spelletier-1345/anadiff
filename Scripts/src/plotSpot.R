@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 23 janvier 2018 - Sandra PELLETIER
+# Le 23 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .plotSpot <- function(RGlogTab, indNbCol, nbCol, state, maxRowCol, dataTest=conf$dataTest) {

@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 23 janvier 2018 - Sandra PELLETIER
+# Le 23 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 .RG4Graph <- function(RG, labelling, dirName, dataTest=conf$dataTest) {

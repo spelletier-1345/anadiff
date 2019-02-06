@@ -1,6 +1,6 @@
 ###############################################
 # AnaDiff Agilent
-# Le 9 janvier 2018 - Sandra PELLETIER
+# Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 # Les données de test et les données de conf (annot, ...) sont dans le mnt/projects

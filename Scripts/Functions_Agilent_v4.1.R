@@ -252,7 +252,6 @@ inopsisFileDivision <- function(dataTest=conf$dataTest) {
   cat("\nJob is done", "\n")
 }
 
-
 singleTiffCompilation <- function(dataTest=conf$dataTest) {
   if (!is.null(dataTest)) {print("singleTiffCompilation")}
   cat("\nCompilation of raw data files from singleTiff to one multiTiff file\n")
@@ -389,8 +388,6 @@ singleTiffCompilation <- function(dataTest=conf$dataTest) {
   }
   cat("\n The job is done :)\nThanks for using our tools and citing Sandra Pelletier for this job\n")
 }
-
-
 
 .tabSAS <- function(annot, tab_sens, tab_antisens, color_sens, color_antisens, 
                     sense, expName, dataTest=conf$dataTest) {

@@ -1,7 +1,7 @@
 ###############################################
 # AnaDiff Agilent
 # Gestion des cas particuliers de génomes
-# Le 23 janvier 2018 - Sandra PELLETIER
+# Le 23 janvier 2019 - Sandra PELLETIER
 ###############################################
 
 # Exceptions Aryane_v2
