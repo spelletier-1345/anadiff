@@ -4,10 +4,10 @@
 ###############################################
 
 .tabSAS <- function(annot, tab_sens, tab_antisens, color_sens, color_antisens, 
-                    senslabel, expNameTabDble, expNameColDble, dataTest=conf$dataTest) {
+                    sensLabel, expNameTabDble, expNameColDble, dataTest=conf$dataTest) {
   if (!is.null(dataTest)) {print("tabSAS")}
-  byY <- ifelse(senslabel=="sens", "probe.y", "probe.x")
-  byX <- ifelse(senslabel=="sens", "probe.x", "probe.y")
+  byY <- ifelse(sensLabel=="sens", "probe.y", "probe.x")
+  byX <- ifelse(sensLabel=="sens", "probe.x", "probe.y")
   tab <- merge(tab_sens[,1:6], annot, by.x="probe_id", by.y=byY, all.y=T)
   tab <- merge(tab, tab_antisens, by.x=byX, by.y="probe_id", all.x=T)
   tab <- tab[,c(2:7,1,8:12,15:ncol(tab))]
