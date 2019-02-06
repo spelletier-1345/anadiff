@@ -27,6 +27,3 @@ sens$stat <- .exportAnaDiff(export$annot, sens$normalize$tabResult, conf$adresse
                        swap$fileOut, se, sens$sensLabel, data$statBH) # !! senseStep ET sense
 
 data$alertes[(nrow(data$alertes)+1),] <- c(sw, ex, se, sens$normalize$var, sens$probesRemoved, sens$stat$pval$nombre_de_sondes)
-
-
-print("ok 06/02/2019")

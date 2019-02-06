@@ -62,6 +62,7 @@ source("./src/color/transformPval.R")
 source("./src/color/transformRat.R")
 source("./src/color/tabColorWithoutData.R")
 source("./src/look.R")
+source("./src/tabSAS.R")
 
 # source des données de configuration
 # Vérifier le chemin des dataTest
@@ -97,6 +98,7 @@ for (se in c("sens", "antisens")) {
 }
 
 source("./array_exeptions.R")
+source("./array_tableDoubleSAS.R")
 
-
-print("done")
+print("ok 06/02/2019")
+print("\ndone")

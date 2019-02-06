@@ -47,9 +47,6 @@ designPuce <- "85372" # Medicago v1
 #### Pas à pas ####
 
     
-    tabDouble <- .tabSAS(annot, tab_sens, tab_antisens, color_sens, color_antisens, sense, expName)
-    name <- paste(swap, export, sep="_")
-    assign(name, tabDouble, envir=globalenv())
   }
   alertes <- rbind(alertes, alerte)
   req <- list(service="ServiceRscripts", method="addAnalyticsRscriptsValue", id=1,
