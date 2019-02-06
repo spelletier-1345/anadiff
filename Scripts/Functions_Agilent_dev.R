@@ -46,7 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-      pr <- .probeRemoved(tab = tabResult, normIntensities, expName, fileOut)
       stat <- .exportAnaDiff(export = export, genome = genome, probe = probe,
                              tabResult = tabResult, adresse = adresse, expName = expName,
                              fileOut, swap = swap, dec = dec, designPuce, senseStep, sense, statBH) # !! senseStep ET sense ?

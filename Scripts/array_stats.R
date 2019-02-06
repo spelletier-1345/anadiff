@@ -21,7 +21,7 @@ if (!data$bkgCalculation) {
 
 sens$normIntensities <- .normIntensite(sens$normalize$MA, sens$tabResultComplet, sens$expName$normI, export$probe)
 .bkgIntensite(sens$normIntensities, as.numeric(export$nbg), sens$expName$bkgI)
-
+sens$probesRemoved <- .probeRemoved(sens$normalize$tabResult, sens$normIntensities, sens$expName$removed, swap$fileOut)
 
 
 print("ok 06/02/2019")
