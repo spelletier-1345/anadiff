@@ -26,4 +26,4 @@ sens$probesRemoved <- .probeRemoved(sens$normalize$tabResult, sens$normIntensiti
 sens$stat <- .exportAnaDiff(export$annot, sens$normalize$tabResult, conf$adresse, sens$expName$texte, sens$expName$htmlC,
                        swap$fileOut, se, sens$sensLabel, data$statBH) # !! senseStep ET sense
 
-data$alertes[(nrow(data$alertes)+1),] <- c(sw, ex, se, sens$normalize$var, sens$probesRemoved, sens$stat$pval$nombre_de_sondes)
+swap$alerte[(nrow(data$alerte)+1),] <- c(sw, ex, se, sens$normalize$var, sens$probesRemoved, sens$stat$pval$nombre_de_sondes)

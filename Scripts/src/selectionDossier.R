@@ -4,17 +4,9 @@
 ###############################################
 
 .selectionDossier <- function(inviteDossier=NULL, dataTest=conf$dataTest) {
-  # Selection du dossier de travail
-  # Args:
-  #   rien
-  # CeQuIlFait:
-  #   demande ou est le fichier arrays.txt
-  #   defini le dossier de travail
-  # Returns:
-  #   rien
-  if (!is.null(dataTest)) {print("selectionDossier")}
+  if (!is.null(dataTest)) {print(".selectionDossier")}
   if (is.null(inviteDossier)) {
-    fileArray <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/summary.txt"
+    fileArray <- conf$dataTest
 } else {
     cat(inviteDossier)
     readLines(n=1)
@@ -25,13 +17,11 @@
       stop(call.=F)
     }
   }
-
   dataFolder <- try(paste(dirname(fileArray),"/",sep=""), silent=TRUE)
   if (!is.null(inviteDossier)) {
     setwd(dataFolder)
     cat("Dossier de travail :\n",dataFolder,"\n\n",sep="")
   }
   fileArray <- basename(fileArray)
-
   return(list(dataFolder,fileArray))
 }

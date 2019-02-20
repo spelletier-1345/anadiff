@@ -14,7 +14,7 @@
   # Returns:
   #   le tableau arrays
   if (!is.null(dataTest)) {print("defineArrays")}
-  path <- ifelse(!is.null(dataTest), dataTest, ".")
+  path <- ifelse(!is.null(dataTest), dirname(dataTest), ".")
   fileListe <- list.files(path = path, pattern = ("_[[:digit:]]+_[[:digit:]]+.txt$"))
   arrays <- read.table(paste(path, fileArray, sep="/"), header=T, encoding="utf-8")
   arrays$FileName <- as.character(arrays$FileName)

@@ -4,16 +4,13 @@
 # Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
-conf  <- c()
+if (!exists("conf")) {conf  <- c()}
 
-conf$dataTest <- NULL
-conf$dataTest <- "/home/spelletier/Documents/Projets/agilent-irhs/Data/"
-conf$graph <- FALSE
-conf$db <- FALSE
-
-conf$version <- "AnaDiff_Script_functions_v5.R" # TODO
+conf$version <- "AnaDiff_Agilent_v5.R" # TODO
 conf$adresse <- .adresse(conf$dataTest)
 conf$localOpt <- options() ; options(warn=-1)
 conf$pck <- c("limma", "httr", "jsonlite")
 conf$verifPackage <- .verifPackages(conf$pck)!=0
-conf$folderArray <- .selectionDossier()
+conf$folderArray <- .selectionDossier(dataTest = conf$dataTest)
+
+if (!exists("data")) {data <- c()}

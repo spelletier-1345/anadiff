@@ -8,10 +8,9 @@
 .adresse <- function(dataTest = conf$dataTest) {
   if (!is.null(dataTest)) {print(".adresse")}
   if (is.null(dataTest)) {
-    adresse <- "http://pegasus-bioinfo.angers-nantes.inra.fr/rscripts/Tools/Agilent/" # TODO
+    source("./conf.R")
   } else {
-    # adresse <- "http://147.99.112.52/rscripts/Tools/Agilent/"
-    adresse <- dataTest
+    adresse <- paste(dirname(conf$dataTest), "/", sep="")
   }
   return(adresse)
 }

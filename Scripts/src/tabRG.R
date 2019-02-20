@@ -14,7 +14,7 @@
   #   large liste contenant l'ensemble des infos des donnees du swap
   if (!is.null(dataTest)) {print("tabRG")}
   target <- arrays[arrays$Swaps==swap,]   # identification des lames à analyser ensemble
-  if (!is.null(dataTest)) {target$FileName <- paste(dataTest, target$FileName, sep="")}
+  if (!is.null(dataTest)) {target$FileName <- paste(dirname(dataTest), target$FileName, sep="/")}
   spots  <- list(R="rMedianSignal",G="gMedianSignal",Rb="rBGMedianSignal",Gb="gBGMedianSignal")
   sondes <- c("ProbeName", "Row", "Col")
   cat("\nLecture des donnees brutes...\n")

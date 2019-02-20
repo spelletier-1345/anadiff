@@ -5,7 +5,7 @@
 ###############################################
 
 swap <- c()
-
+cat("\n\n::::::::::::   ok\n")
 swap$dirName <- .creationAnaDiff(conf$dataTest, data$designPuce, sw, data$labelling)
 swap$fileOut <- .creationFileOut(swap$dirName, sw, conf$dataTest)
 swap$arrays <- as.data.frame(.defineArrays(swap$dirName, swap$fileOut, conf$folderArray[[2]], conf$dataTest))
@@ -23,3 +23,7 @@ swap$json <- list(swap=list(
   fileArray=swap$arrays[,1:4],
   ctrlName=swap$arrays$CtrName[1],
   ttmtName=swap$arrays$TtmtName[1]))
+
+# Alertes du swap
+swap$alerte <-data.frame(matrix(vector(),nrow=0, ncol=6,
+                         dimnames=list(c(), c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))

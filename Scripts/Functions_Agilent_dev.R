@@ -6,14 +6,14 @@
 
 
 # Vérifications designs
-anaDiffAgilent("62001", "direct")   # Venise v1
-anaDiffAgilent("62001", "indirect") # Venise v1
+# anaDiffAgilent("62001", "direct")   # Venise v1
+# anaDiffAgilent("62001", "indirect") # Venise v1
 anaDiffAgilent("64677", "direct", dataTest=TRUE)   # Aryane v1
 anaDiffAgilent("64677", "indirect", dataTest=TRUE) # Aryane v1
 anaDiffAgilent("69670", "direct", dataTest=TRUE)   # Orobanche
 anaDiffAgilent("69670", "indirect", dataTest=TRUE) # Orobanche
-anaDiffAgilent("70158", "direct", dataTest=TRUE)   # Aryane v2 sans Venise v1
-anaDiffAgilent("70158", "indirect", dataTest=TRUE) # Aryane v2 sans venise v1
+# anaDiffAgilent("70158", "direct", dataTest=TRUE)   # Aryane v2 sans Venise v1
+# anaDiffAgilent("70158", "indirect", dataTest=TRUE) # Aryane v2 sans venise v1
 anaDiffAgilent("70465", "direct", dataTest=TRUE)   # Aryane v2
 anaDiffAgilent("70465", "indirect", dataTest=TRUE) # Aryane v2
 anaDiffAgilent("71114", "direct", dataTest=TRUE)   # CatmaIRHS v1
@@ -46,15 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-    
-  }
-  alertes <- rbind(alertes, alerte)
-  req <- list(service="ServiceRscripts", method="addAnalyticsRscriptsValue", id=1,
-              params=c('anaDiff_Agilent', toJSON(json)))
-  res <- POST("http://147.99.112.52/cgi-bin/elvis/ServiceRscripts.py", body=req, encode = "json")
-  .alertes(alerte, fileOut)
-  .writeLineOut(paste("\n===  Analyses du swap", swap, "terminées  ==="), fileOut)
-}
 cat("\n===================================\n")
 cat("====== Analyses terminées =========")
 cat("\n===================================\n")

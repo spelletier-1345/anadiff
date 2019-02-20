@@ -9,7 +9,7 @@
   #   designPuce : design de la puce utilisee
   # Returns:
   #   designInfo : dataframe comportant les differentes infos relatives au design utilise
-  if (!is.null(dataTest)) {print("designVersion")}
+  if (!is.null(dataTest)) {print(".designVersion")}
   if (!is.null(dataTest)) {
     # Utilisation d'un fichier designSpecificity.txt de test
     # Mettre le nom du fichier à tester

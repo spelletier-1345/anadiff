@@ -13,10 +13,8 @@
   # Returns:
   #   rien
   if (!is.null(dataTest)) {print("writeLineOut")}
-  if (fileOut=="noOut") {
-    cat(paste(lineOut, "\n", sep=""))
-  } else {
-    cat(paste(lineOut, "\n", sep=""))
+  cat(paste(lineOut, "\n", sep=""))
+  if (fileOut!="noOut") {
     write.table(lineOut, fileOut, quote=F, append=T, row.names=F, col.names=F)
   }
   return(NULL)
