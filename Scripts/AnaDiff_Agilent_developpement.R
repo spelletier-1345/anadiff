@@ -16,7 +16,8 @@ rm(list=ls(all.names = TRUE))
 designPuce <- "dataTest" # TODO : effacer
 
 source("./array_anaDiff.R")
-AnaDiff_Agilent("dataTest")
+AnaDiff_Agilent(designPuce)
 
-print("ok 20/02/2019")
+cat("\n")
+print("all is ok the 27/02/2019")
 print("done")

@@ -46,13 +46,6 @@ designPuce <- "85372" # Medicago v1
 
 #### Pas à pas ####
 
-cat("\n===================================\n")
-cat("====== Analyses terminées =========")
-cat("\n===================================\n")
-cat("\nRécapitulation des alertes :\n")
-.alertes(alertes, "noOut")
-rm(annot, color_antisens, color_sens, tab_antisens, tab_sens, envir=globalenv())
-options(localOpt)
 
 
 ###################

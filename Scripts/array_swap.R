@@ -3,9 +3,7 @@
 # Données d'un swap
 # Le 23 janvier 2019 - Sandra PELLETIER
 ###############################################
-
 swap <- c()
-cat("\n\n::::::::::::   ok\n")
 swap$dirName <- .creationAnaDiff(conf$dataTest, data$designPuce, sw, data$labelling)
 swap$fileOut <- .creationFileOut(swap$dirName, sw, conf$dataTest)
 swap$arrays <- as.data.frame(.defineArrays(swap$dirName, swap$fileOut, conf$folderArray[[2]], conf$dataTest))
