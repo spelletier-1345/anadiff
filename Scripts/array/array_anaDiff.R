@@ -5,20 +5,20 @@
 ###############################################
 
 # source des scripts pour Agilent
-source("./arrays_sources.R") # TODO : makefile
+source("./array/array_sources.R") # TODO : makefile
 
 AnaDiff_Agilent <- function(designPuce, labelling="direct", popBH="alternate", statBH="BH",
                              dataTest=conf$dataTest, bkgCalculation = TRUE, dec = ".") {
   if (designPuce=="dataTest") {
-    cat("\n");print(">>> dataTest.R")
-    source("./dataTest.R")
+    cat("\n");cat(">>> dataTest.R\n")
+    source("./array/array_dataTest.R")
   }
 
   # source des données de configuration
   # Vérifier le chemin des dataTest
   # TODO : fichier de configuration
-  source("./array_conf.R")
-  cat("\n");print(">>> array_conf.R")
+  source("./array/array_conf.R")
+  cat("\n");cat(">>> array_conf.R\n")
   if (!designPuce=="dataTest") {
     data$designPuce <- designPuce
     data$labelling <- labelling
@@ -31,8 +31,8 @@ AnaDiff_Agilent <- function(designPuce, labelling="direct", popBH="alternate", s
   # Modification possibles :
   # - numéro de design
   # - labelling
-  cat("\n");print(">>> array_data.R")
-  source("./array_data.R")
+  cat("\n");cat(">>> array_data.R\n")
+  source("./array/array_data.R")
   
   # Analyse des données
   #####################
@@ -40,40 +40,40 @@ AnaDiff_Agilent <- function(designPuce, labelling="direct", popBH="alternate", s
   # swap
   for (sw in data$swaps) {
     # sw <- data$swaps[1]
-    cat("\n");print(">>> array_swap.R")
-    source("./array_swap.R", TRUE)
+    cat("\n");cat(">>> array_swap.R\n")
+    source("./array/array_swap.R", TRUE)
     if (conf$graph) {
-      cat("\n");print(">>> array_graph-GEO.R")
-      source("./array_graph-GEO.R")
+      cat("\n");cat(">>> array_graph-GEO.R\n")
+      source("./array/array_graph-GEO.R")
     }
     
     # export
     for (ex in data$exports) {
       # ex <- data$exports[1]
-      cat("\n");print(">>> array_export.R")
-      source("./array_export.R", TRUE)
+      cat("\n");cat(">>> array_export.R\n")
+      source("./array/array_export.R", TRUE)
       
       # sens
       for (se in c("sens", "antisens")) {
         # se <- "sens"
-        cat("\n");print(">>> array_sens.R")
-        source("./array_sens.R", TRUE)
-        cat("\n");print(">>> array_stats.R")
-        source("./array_stats.R", TRUE)
+        cat("\n");cat(">>> array_sens.R\n")
+        source("./array/array_sens.R", TRUE)
+        cat("\n");cat(">>> array_stats.R\n")
+        source("./array/array_stats.R", TRUE)
         if (conf$db) {
-          cat("\n");print(">>> array_json4db.R")
-          source("./array_json4db.R")
+          cat("\n");cat(">>> array_json4db.R\n")
+          source("./array/array_json4db.R")
         }
-        # cat("\n");print(">>> array_alerte.R")
-        # source("./array_alerte.R")
+        # cat("\n");cat(">>> array_alerte.R\n")
+        # source("./array/array_alerte.R")
       }
-      cat("\n");print(">>> array_exceptions.R")
-      source("./array_exceptions.R")
-      cat("\n");print(">>> array_tableDoubleSAS.R")
-      source("./array_tableDoubleSAS.R", TRUE)
+      cat("\n");cat(">>> array_exceptions.R\n")
+      source("./array/array_exceptions.R")
+      cat("\n");cat(">>> array_tableDoubleSAS.R\n")
+      source("./array/array_tableDoubleSAS.R", TRUE)
     }
-    cat("\n");print(">>> array_alerte-req.R")
-    source("./array_alerte-req.R", TRUE)
+    cat("\n");cat(">>> array_alerte-req.R\n")
+    source("./array/array_alerte-req.R", TRUE)
   }
   cat("\n===================================\n")
   cat("====== Analyses terminées =========")

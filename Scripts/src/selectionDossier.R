@@ -4,7 +4,7 @@
 ###############################################
 
 .selectionDossier <- function(inviteDossier=NULL, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print(".selectionDossier")}
+  if (!is.null(dataTest)) {print("selectionDossier")}
   if (is.null(inviteDossier)) {
     fileArray <- conf$dataTest
 } else {

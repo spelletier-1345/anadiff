@@ -9,13 +9,14 @@
 # - Analyse par génome (export)
 # - Analyse par sens de sonde (sens/antisens)
 # - Gestion des exceptions
+# - Affichage des alertes et enregistrement dans la base
 #
 ###############################################
 
 rm(list=ls(all.names = TRUE))
 designPuce <- "dataTest" # TODO : effacer
 
-source("./array_anaDiff.R")
+source("./array/array_anaDiff.R")
 AnaDiff_Agilent(designPuce)
 
 cat("\n")

@@ -8,23 +8,23 @@
 # Vérifications designs
 # anaDiffAgilent("62001", "direct")   # Venise v1
 # anaDiffAgilent("62001", "indirect") # Venise v1
-anaDiffAgilent("64677", "direct", dataTest=TRUE)   # Aryane v1
-anaDiffAgilent("64677", "indirect", dataTest=TRUE) # Aryane v1
-anaDiffAgilent("69670", "direct", dataTest=TRUE)   # Orobanche
-anaDiffAgilent("69670", "indirect", dataTest=TRUE) # Orobanche
-# anaDiffAgilent("70158", "direct", dataTest=TRUE)   # Aryane v2 sans Venise v1
-# anaDiffAgilent("70158", "indirect", dataTest=TRUE) # Aryane v2 sans venise v1
-anaDiffAgilent("70465", "direct", dataTest=TRUE)   # Aryane v2
-anaDiffAgilent("70465", "indirect", dataTest=TRUE) # Aryane v2
-anaDiffAgilent("71114", "direct", dataTest=TRUE)   # CatmaIRHS v1
-anaDiffAgilent("71114", "indirect", dataTest=TRUE) # CatmaIRHS v1
-anaDiffAgilent("73146", "direct", dataTest=TRUE)   # CatmaIRHS v1 + AltBr v1.2
-anaDiffAgilent("73146", "indirect", dataTest=TRUE) # CatmaIRHS v1 + AltBr v1.2
-anaDiffAgilent("78635", "direct", dataTest=TRUE)   # Pyrus v1
-anaDiffAgilent("78635", "indirect", dataTest=TRUE) # Pyrus v1
-anaDiffAgilent("84550", "direct", dataTest=TRUE)   # Carrot v1
-anaDiffAgilent("84550", "indirect", dataTest=TRUE) # Carrot v1
-anaDiffAgilent("85275", "direct", dataTest=TRUE)   # Malus v1
+anaDiffAgilent("64677", "direct")   # Aryane v1
+anaDiffAgilent("64677", "indirect") # Aryane v1
+anaDiffAgilent("69670", "direct")   # Orobanche
+anaDiffAgilent("69670", "indirect") # Orobanche
+# anaDiffAgilent("70158", "direct")   # Aryane v2 sans Venise v1
+# anaDiffAgilent("70158", "indirect") # Aryane v2 sans venise v1
+anaDiffAgilent("70465", "direct")   # Aryane v2
+anaDiffAgilent("70465", "indirect") # Aryane v2
+anaDiffAgilent("71114", "direct")   # CatmaIRHS v1
+anaDiffAgilent("71114", "indirect") # CatmaIRHS v1
+anaDiffAgilent("73146", "direct")   # CatmaIRHS v1 + AltBr v1.2
+anaDiffAgilent("73146", "indirect") # CatmaIRHS v1 + AltBr v1.2
+anaDiffAgilent("78635", "direct")   # Pyrus v1
+anaDiffAgilent("78635", "indirect") # Pyrus v1
+anaDiffAgilent("84550", "direct")   # Carrot v1
+anaDiffAgilent("84550", "indirect") # Carrot v1
+anaDiffAgilent("85275", "direct")   # Malus v1
 
 #design <- commandArgs(trailingOnly=TRUE)
 

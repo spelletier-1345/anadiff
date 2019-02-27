@@ -1,23 +1,25 @@
 ###############################################
-# AnaDiff Agilent
-# Données de test
-# Le 9 janvier 2019 - Sandra PELLETIER
+# AnaDiff IRHS
+# Le 20 février 2019 - Sandra PELLETIER
+# 
+# Mes données de test
+# 
 ###############################################
 
-data <- c()
+# Dossier de travail
+conf <- c()
+conf$folderArray[[1]] <- "/home/spelletier/Documents/Projets/anadiff/Data/"
+conf$folderArray[[2]] <- "summary.txt"
+conf$dataTest <- paste(conf$folderArray, collapse="")
+# conf$dataTest <- paste(conf$folderArray, collapse="")
+conf$graph <- FALSE
+conf$db <- FALSE
 
+# Données du design pour AnaDiff_Agilent()
+data <- c()
 data$designPuce <- "84550" # Carrot v1
 data$labelling <- "direct"
 data$popBH <- "alternate"
 data$statBH <- "BH"
 data$bkgCalculation <- TRUE
 data$dec <- "."
-
-conf$folderArray[[1]] <- "/home/spelletier/Documents/Projets/anadiff/Data/"
-
-data$arraysTxt <- read.table(paste(conf$folderArray, collapse = ""), header=T, encoding="utf-8")
-data$swaps <- paste(unique(data$arraysTxt$Swaps))
-data$designList <- .designVersion(data$designPuce, conf$adresse)
-data$exports = data$designList$export
-data$alertes <- data.frame(matrix(vector(),nrow=0, ncol=6,
-                                  dimnames=list(c(), c("swap", "export", "sens", "variance", "gRemoved", "gExpress"))))

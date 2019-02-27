@@ -6,15 +6,18 @@
 .nomExportAD <- function(export, sens, dirName, swap, adresse, dataTest=conf$dataTest) {  # doc !!!
   # cree une liste de nom pour l'export des fichiers couleur en fonction des formats
   if (!is.null(dataTest)) {print("nomExportAD")}
-  exportS=paste(export, sens, sep="_")
-  dirNameS <- paste(dirName, sens, "/", sep="")
-  htmlC <- .nomFichier("_AnaDiff_Couleur.html", dirNameS, swap, exportS)
-  texte <- .nomFichier("_AnaDiff.txt", dirNameS, swap, exportS)
-  txtWb <- .nomFichier("_AnaDiff_wb.txt", dirNameS, swap, exportS)
-  htmlD <- .nomFichier("_AnaDiff.html", dirNameS, swap, exportS)
-  bkgI  <- .nomFichier("_bkg_intensities.txt", dirNameS, swap, exportS)
-  normI <- .nomFichier("_norm_intensities.txt", dirNameS, swap, exportS)
-  data  <- .nomFichier("_AnaDiff_Data.txt", dirNameS, swap, exportS)
+  print(export)
+  exportSens=paste(export, sens, sep="_")
+  dirNameSens <- paste(dirName, sens, "/", sep="")
+  print(exportSens)
+  htmlC <- .nomFichier("_AnaDiff_Couleur.html", dirNameSens, swap, exportSens)
+  print(htmlC)
+  texte <- .nomFichier("_AnaDiff.txt", dirNameSens, swap, exportSens)
+  txtWb <- .nomFichier("_AnaDiff_wb.txt", dirNameSens, swap, exportSens)
+  htmlD <- .nomFichier("_AnaDiff.html", dirNameSens, swap, exportSens)
+  bkgI  <- .nomFichier("_bkg_intensities.txt", dirNameSens, swap, exportSens)
+  normI <- .nomFichier("_norm_intensities.txt", dirNameSens, swap, exportSens)
+  data  <- .nomFichier("_AnaDiff_Data.txt", dirNameSens, swap, exportSens)
 
   dirNameQC <- paste(dirName, "qualityControl_geoSubmission/", sep="")
   removed <- .nomFichier(paste("_", sens, "_probes_removed.txt", sep=""),

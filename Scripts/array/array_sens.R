@@ -8,7 +8,7 @@ sens <- c()
 
 sens$sensLabel <- ifelse(data$labelling=="indirect", ifelse(se=="sens", "antisens", "sens"), se)
 .writeLineOut(paste("\n===>>>   Analyse des sondes", se), swap$fileOut)
-sens$expName <- .nomExportAD(export$export, sens$sensLabel, swap$dirName, swap$swap, adresse=conf$adresse)
+sens$expName <- .nomExportAD(ex, sens$sensLabel, swap$dirName, sw, adresse=conf$adresse)
 if (se=="sens") {
   sens$probeList <- data.frame(V1=export$probeList[,1])
 } else {
