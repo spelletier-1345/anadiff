@@ -12,4 +12,3 @@ conf$localOpt <- options() ; options(warn=-1)
 conf$pck <- c("limma", "httr", "jsonlite")
 conf$verifPackage <- .verifPackages(conf$pck)!=0
 conf$folderArray <- .selectionDossier(dataTest = conf$dataTest)
-if (!exists("data")) {data <- c()}

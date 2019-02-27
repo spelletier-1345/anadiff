@@ -17,8 +17,9 @@ AnaDiff_Agilent <- function(designPuce, labelling="direct", popBH="alternate", s
   # source des données de configuration
   # Vérifier le chemin des dataTest
   # TODO : fichier de configuration
-  source("./array/array_conf.R")
   cat("\n");cat(">>> array_conf.R\n")
+  source("./array/array_conf.R")
+  if (!"data" %in% ls()) {data <- c()}
   if (!designPuce=="dataTest") {
     data$designPuce <- designPuce
     data$labelling <- labelling
@@ -32,7 +33,7 @@ AnaDiff_Agilent <- function(designPuce, labelling="direct", popBH="alternate", s
   # - numéro de design
   # - labelling
   cat("\n");cat(">>> array_data.R\n")
-  source("./array/array_data.R")
+  source("./array/array_data.R", TRUE)
   
   # Analyse des données
   #####################

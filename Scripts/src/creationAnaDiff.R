@@ -14,13 +14,10 @@
   #   defini le dossier de travail
   # Returns:
   #   rien
-  print("dataTest :")
-  print(dataTest)
   if (!is.null(dataTest)) {print("creationAnaDiff")}
   dirName <- paste("AnaDiff_", swap, sep="")
   if (!is.null(dataTest)) {
     dirName <- paste(paste(dataTest, "AnaDiff", sep=""),designPuce,labelling,sep="_")
-    print(dirName)
   } else if (is.element(dirName,dir())) {
     cat("Creation du dossier AnaDiff...\n")
     numDir <- 1

@@ -14,7 +14,8 @@
 ###############################################
 
 rm(list=ls(all.names = TRUE))
-designPuce <- "dataTest" # TODO : effacer
+setwd("/home/spelletier/Documents/Projets/anadiff/Scripts/")
+designPuce <- "84550" # TODO : effacer
 
 source("./array/array_anaDiff.R")
 AnaDiff_Agilent(designPuce)

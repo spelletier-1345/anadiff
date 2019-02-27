@@ -6,12 +6,9 @@
 .nomExportAD <- function(export, sens, dirName, swap, adresse, dataTest=conf$dataTest) {  # doc !!!
   # cree une liste de nom pour l'export des fichiers couleur en fonction des formats
   if (!is.null(dataTest)) {print("nomExportAD")}
-  print(export)
   exportSens=paste(export, sens, sep="_")
   dirNameSens <- paste(dirName, sens, "/", sep="")
-  print(exportSens)
   htmlC <- .nomFichier("_AnaDiff_Couleur.html", dirNameSens, swap, exportSens)
-  print(htmlC)
   texte <- .nomFichier("_AnaDiff.txt", dirNameSens, swap, exportSens)
   txtWb <- .nomFichier("_AnaDiff_wb.txt", dirNameSens, swap, exportSens)
   htmlD <- .nomFichier("_AnaDiff.html", dirNameSens, swap, exportSens)
