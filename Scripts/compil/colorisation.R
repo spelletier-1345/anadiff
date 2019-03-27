@@ -2,10 +2,7 @@
 
 # Liste des arguments (fichier et entêtes de colonnes)
 cat("\n--- Lecture des arguments\n")
-listArgs <- list(commandArgs(trailingOnly=TRUE))[]
-print(listArgs)
-
-cat("\n--- Arguments\n")
+listArgs <- list("arguments" = commandArgs(trailingOnly=TRUE))
 
 command <- ""
 arguments <- function(command, argument, listArgs){
@@ -34,7 +31,33 @@ for (argument in listArgs[[1]]) {
 print(listArgs)
 
 # Lecture du fichier
-cat("\n--- Lecture du fichier\n")
+cat("--- Lecture du fichier\n")
 tab <- read.table(listArgs$file2color, header=T, encoding="utf-8")
-print(nrow(tab))
-print(colnames(tab))
+nbcol <- ncol(tab)
+nbrow <- nrow(tab)
+cat(paste("Nombre de lignes :", nbrow))
+cat(paste("\nNombre de colonnes :", nbcol))
+cat("\nEntêtes des colonnes :")
+cat(paste("\n  ", colnames(tab)))
+cat("\n")
+
+# transformation du tableau
+cat("\n--- Transformation du fichier\n")
+typeOfColor <- function(listArgs, ent) {
+  for (i in listArgs[3:length(listArgs)]) {
+    if (length(grep(i, ent)==1)) {return(names(which(listArgs[3:length(listArgs)]==i)))}
+  }
+}
+
+matColor <- matrix(nrow=nbrow+3, ncol=1)
+matColor[1,1] <- "<table>"
+matColor[2,1] <- "<tr></tr>"
+matColor[nrow(matColor),1] <- "</table>"
+
+for (i in seq(1:ncol(tab))){
+  data <- list("ent"=colnames(tab)[i], val=list(tab[,i])[[1]])
+  toc <- typeOfColor(listArgs, data$ent)
+  print(toc)
+  if (is.null(toc)) {print("is null")}
+}
+
