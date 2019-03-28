@@ -1,5 +1,5 @@
 #!/usr/bin/env Rscript
-
+source("/home/spelletier/mnt/irhs001_projects/PROJETS_COLLABORATIFS/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/compil/colorFunctions.R")
 # Liste des arguments (fichier et entêtes de colonnes)
 cat("\n--- Lecture des arguments\n")
 listArgs <- list("arguments" = commandArgs(trailingOnly=TRUE))
@@ -52,12 +52,30 @@ typeOfColor <- function(listArgs, ent) {
 matColor <- matrix(nrow=nbrow+3, ncol=1)
 matColor[1,1] <- "<table>"
 matColor[2,1] <- "<tr></tr>"
+matColor[3:nrow(matColor)-1,1] <- "<tr>"
 matColor[nrow(matColor),1] <- "</table>"
+
+temp <- matColor[3:nrow(matColor)-1,1]
 
 for (i in seq(1:ncol(tab))){
   data <- list("ent"=colnames(tab)[i], val=list(tab[,i])[[1]])
   toc <- typeOfColor(listArgs, data$ent)
   print(toc)
-  if (is.null(toc)) {print("is null")}
+  print(data$val)
+  if (is.null(toc)) {
+    temp <- paste(temp, "<tr></tr>", sep="")
+  } else if (toc=="ratio") {
+    val <- sapply(data$val, .transformRat)
+    val <- sapply(val, .htmlTag)
+    temp <- paste(temp, val, sep="")
+  }
 }
+matColor[3:nrow(matColor)-1,1] <- temp
 
+cat("\n--- Résultat matColor\n")
+print(data$val)
+print(sapply(data$val, .transformRat))
+print(.htmlTag("#a0a0a0"))
+for (row in matColor[-c(10:80),]) {
+  print(row)
+}

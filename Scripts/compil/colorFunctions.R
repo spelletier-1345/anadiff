@@ -7,8 +7,8 @@
   paletteNoire <- "#000000"
   return(list(bleue=paletteBleue, jaune=paletteJaune, verte=paletteVerte, rouge=paletteRouge, noire=paletteNoire))
 }
-.transformBh <- function(bh, dataTest=conf$dataTest, 
-                         gammeBleue=.gammeCouleurs()$bleue, 
+.transformBh <- function(bh, dataTest=conf$dataTest,
+                         gammeBleue=.gammeCouleurs()$bleue,
                          valeurZero=.gammeCouleurs()$noire) {
   if      (is.na(bh))    {cBh <- "#a0a0a0"}
   else if (bh < 0.00001) {cBh <- gammeBleue[4]}
@@ -53,4 +53,12 @@
   else if (rat < 3)      {cRat <- "#aa0000"}
   else                   {cRat <- "#ff0000"}
   return(cRat)
+}
+.htmlTag <- function(color) {
+  htmlCode <- paste("<td align=\"center\" bgcolor=\"",
+                    color,
+                    "\">",
+                    "</td>",
+                    sep = "")
+  return(htmlCode)
 }
