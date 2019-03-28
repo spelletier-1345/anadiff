@@ -72,6 +72,10 @@ for (i in seq(1:ncol(tab))){
     val <- sapply(data$val, .transformPval)
     val <- sapply(val, .htmlTag)
     temp <- paste(temp, val, sep="")
+  } else if (toc=="bh") {
+    val <- sapply(data$val, .transformBh)
+    val <- sapply(val, .htmlTag)
+    temp <- paste(temp, val, sep="")
   }
 }
 matColor[3:nrow(matColor)-1,1] <- temp
