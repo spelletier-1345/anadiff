@@ -83,4 +83,5 @@ for (i in seq(1:ncol(tab))){
 temp <- paste(temp, "</tr>", sep="")
 matColor[3:(nrow(matColor)-1),1] <- temp
 
-write.table(matColor, "matColor.html", row.names=F, col.names=F, quote=F)
+fileName <- paste(tools::file_path_sans_ext(listArgs$file2color), ".html", sep="")
+write.table(matColor, fileName, row.names=F, col.names=F, quote=F)
