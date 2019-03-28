@@ -44,7 +44,6 @@ cat(paste("\n  ", colnames(tab)))
 cat("\n")
 
 # transformation du tableau
-cat("\n--- Transformation du fichier\n")
 typeOfColor <- function(listArgs, ent) {
   for (i in listArgs[3:length(listArgs)]) {
     if (length(grep(i, ent)==1)) {return(names(which(listArgs[3:length(listArgs)]==i)))}
@@ -54,18 +53,15 @@ typeOfColor <- function(listArgs, ent) {
 matColor <- matrix(nrow=nbrow+3, ncol=1)
 matColor[1,1] <- "<table>"
 matColor[2,1] <- "<tr></tr>"
-matColor[3:nrow(matColor)-1,1] <- "<tr>"
+matColor[3:(nrow(matColor)-1),1] <- "<tr>"
 matColor[nrow(matColor),1] <- "</table>"
-
-temp <- matColor[3:nrow(matColor)-1,1]
+temp <- matColor[3:(nrow(matColor)-1),1]
 
 for (i in seq(1:ncol(tab))){
   data <- list("ent"=colnames(tab)[i], val=list(tab[,i])[[1]])
   toc <- typeOfColor(listArgs, data$ent)
-  print(toc)
-  print(data$val)
   if (is.null(toc)) {
-    temp <- paste(temp, "<tr></tr>", sep="")
+    temp <- paste(temp, "<td></td>", sep="")
   } else if (toc=="ratio") {
     val <- sapply(data$val, .transformRat)
     val <- sapply(val, .htmlTag)
@@ -84,9 +80,7 @@ for (i in seq(1:ncol(tab))){
     temp <- paste(temp, val, sep="")
   }
 }
-matColor[3:nrow(matColor)-1,1] <- temp
+temp <- paste(temp, "</tr>", sep="")
+matColor[3:(nrow(matColor)-1),1] <- temp
 
-cat("\n--- Résultat matColor\n")
-for (row in matColor[-c(10:80),]) {
-  print(row)
-}
+write.table(matColor, "matColor.html", row.names=F, col.names=F, quote=F)
