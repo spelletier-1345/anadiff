@@ -1,5 +1,4 @@
-.gammeCouleurs <- function(dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("gammeCouleurs")}
+.gammeCouleurs <- function() {
   paletteBleue <- colorRampPalette(c("#0000FF","#79F8F8"))(4)
   paletteJaune <- colorRampPalette(c("#3A3A00","#C5C500","#E6E600","#FFFF66"))(9)
   paletteVerte <- colorRampPalette(c("#11391E","#00FF00"))(10)
@@ -7,7 +6,7 @@
   paletteNoire <- "#000000"
   return(list(bleue=paletteBleue, jaune=paletteJaune, verte=paletteVerte, rouge=paletteRouge, noire=paletteNoire))
 }
-.transformBh <- function(bh, dataTest=conf$dataTest,
+.transformBh <- function(bh,
                          gammeBleue=.gammeCouleurs()$bleue,
                          valeurZero=.gammeCouleurs()$noire) {
   if      (is.na(bh))    {cBh <- "#a0a0a0"}
@@ -18,7 +17,9 @@
   else                   {cBh <- valeurZero}
   return(cBh)
 }
-.transformInt <- function(int, dataTest=conf$dataTest, gammeJaune=.gammeCouleurs()$jaune, valeurZero=.gammeCouleurs()$noire) {
+.transformInt <- function(int,
+                          gammeJaune=.gammeCouleurs()$jaune,
+                          valeurZero=.gammeCouleurs()$noire) {
   if (is.na(int)) {cInt <- "#a0a0a0"}
   else {
     int <- round(int)
@@ -28,7 +29,7 @@
   }
   return(cInt)
 }
-.transformPval <- function(pval, dataTest=conf$dataTest,
+.transformPval <- function(pval,
                            gammeBleue=.gammeCouleurs()$bleue,
                            valeurZero=.gammeCouleurs()$noire) {
   if      (is.na(pval))    {cPval <- "#a0a0a0"}
@@ -39,7 +40,7 @@
   else                     {cPval <- valeurZero}
   return(cPval)
 }
-.transformRat <- function(rat, dataTest=conf$dataTest) {
+.transformRat <- function(rat) {
   if      (is.na(rat))   {cRat <- "#a0a0a0"}
   else if (rat < (-3))   {cRat <- "#00ff00"}
   else if (rat < (-1.5)) {cRat <- "#00aa00"}

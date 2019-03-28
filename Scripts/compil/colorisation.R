@@ -68,14 +68,15 @@ for (i in seq(1:ncol(tab))){
     val <- sapply(data$val, .transformRat)
     val <- sapply(val, .htmlTag)
     temp <- paste(temp, val, sep="")
+  } else if (toc=="pval") {
+    val <- sapply(data$val, .transformPval)
+    val <- sapply(val, .htmlTag)
+    temp <- paste(temp, val, sep="")
   }
 }
 matColor[3:nrow(matColor)-1,1] <- temp
 
 cat("\n--- Résultat matColor\n")
-print(data$val)
-print(sapply(data$val, .transformRat))
-print(.htmlTag("#a0a0a0"))
 for (row in matColor[-c(10:80),]) {
   print(row)
 }
