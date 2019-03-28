@@ -8,6 +8,8 @@ command <- ""
 arguments <- function(command, argument, listArgs){
   if (command=="f") {
     listArgs$file2color <- argument
+  } else if (command=="i") {
+    listArgs$intensity <- argument
   } else if (command=="r") {
     listArgs$ratio <- argument
   } else if (command=="p") {
@@ -74,6 +76,10 @@ for (i in seq(1:ncol(tab))){
     temp <- paste(temp, val, sep="")
   } else if (toc=="bh") {
     val <- sapply(data$val, .transformBh)
+    val <- sapply(val, .htmlTag)
+    temp <- paste(temp, val, sep="")
+  } else if (toc=="intensity") {
+    val <- sapply(data$val, .transformInt)
     val <- sapply(val, .htmlTag)
     temp <- paste(temp, val, sep="")
   }
