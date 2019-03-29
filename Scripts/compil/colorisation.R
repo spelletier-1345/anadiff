@@ -16,8 +16,8 @@ arguments <- function(command, argument, listArgs){
     listArgs$pval <- argument
   } else if (command=="b") {
     listArgs$bh <- argument
-  } else if (command=="s") {
-    listArgs$seb <- argument
+  } else if (command=="m") {
+    listArgs$minimize <- argument
   }
   return(listArgs)
 }
@@ -77,6 +77,9 @@ for (i in seq(1:ncol(tab))){
   } else if (toc=="intensity") {
     val <- sapply(data$val, .transformInt)
     val <- sapply(val, .htmlTag)
+    temp <- paste(temp, val, sep="")
+  } else if (toc=="minimize") {
+    val <- "<td align=\"center\" sdnum=\"4108;0;0.00\"></td>"
     temp <- paste(temp, val, sep="")
   }
 }
