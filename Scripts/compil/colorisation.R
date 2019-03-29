@@ -1,4 +1,5 @@
 #!/usr/bin/env Rscript
+# @ags-1345-209:PRODUCTION$ ./AnaDiff_IRHS/Scripts/compil/colorisation.R -f ./DataTest/RNAseq_seb/compil.txt -m BH_* -p pval_* -r *_logFC
 source("/home/spelletier/mnt/irhs001_projects/PROJETS_COLLABORATIFS/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/compil/colorFunctions.R")
 # Liste des arguments (fichier et entêtes de colonnes)
 cat("\n--- Lecture des arguments\n")
