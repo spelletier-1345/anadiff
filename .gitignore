@@ -1,6 +1,6 @@
-/Scripts/.RData
-/Scripts/.Rhistory
-/Scripts/.Rproj.user
+*.RData
+*.Rhistory
+*.Rproj.user
 /Scripts/Agilent_dev.Rproj
 /Scripts/anaDiff.Rproj
 /Data
