@@ -35,7 +35,7 @@ print(listArgs)
 
 # Lecture du fichier
 cat("--- Lecture du fichier\n")
-tab <- read.table(listArgs$file2color, header=T, encoding="utf-8")
+tab <- read.table(listArgs$file2color, header=T, sep="\t", encoding="utf-8")
 nbcol <- ncol(tab)
 nbrow <- nrow(tab)
 cat(paste("Nombre de lignes :", nbrow))
