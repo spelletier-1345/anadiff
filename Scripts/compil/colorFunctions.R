@@ -63,3 +63,34 @@
                     sep = "")
   return(htmlCode)
 }
+.typeOfColor <- function(listArgs, ent) {
+  for (i in listArgs[3:length(listArgs)]) {
+    if (length(grep(i, ent)==1)) {return(names(which(listArgs[3:length(listArgs)]==i)))}
+  }
+}
+.colorCol <- function(ent, val, toc) {
+  # data <- list("ent"=colnames(tab)[i], val=list(tab[,i])[[1]])
+  # toc <- typeOfColor(listArgs, data$ent)
+  if (is.null(toc)) {
+    return("<td></td>")
+  } else if (toc=="ratio") {
+    val <- sapply(val, .transformRat)
+    val <- sapply(val, .htmlTag)
+    return(val)
+  } else if (toc=="pval") {
+    val <- sapply(val, .transformPval)
+    val <- sapply(val, .htmlTag)
+    return(val)
+  } else if (toc=="bh") {
+    val <- sapply(val, .transformBh)
+    val <- sapply(val, .htmlTag)
+    return(val)
+  } else if (toc=="intensity") {
+    val <- sapply(val, .transformInt)
+    val <- sapply(val, .htmlTag)
+    return(val)
+  } else if (toc=="minimize") {
+    val <- "<td align=\"center\" sdnum=\"4108;0;0.00\"></td>"
+    return(val)
+  }
+}
