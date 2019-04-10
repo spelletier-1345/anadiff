@@ -1,10 +1,22 @@
 #!/usr/bin/env Rscript
 # @ags-1345-209:PRODUCTION$ ./AnaDiff_IRHS/Scripts/compil/colorisation.R -f ./DataTest/RNAseq_seb/compil.txt -m BH_* -p pval_* -r *_logFC
-source("/home/spelletier/mnt/irhs001_projects/PROJETS_COLLABORATIFS/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/compil/colorFunctions.R")
-# Liste des arguments (fichier et entêtes de colonnes)
-cat("\n--- Lecture des arguments\n")
-listArgs <- list("arguments" = commandArgs(trailingOnly=TRUE))
+source("./Scripts/src/conf.R")
+source("./Scripts/compil/colorFunctions.R")
 
+# Liste des arguments (fichier et entêtes de colonnes)
+listArgs <- list("arguments" = commandArgs(trailingOnly=TRUE))
+# Vérification non nul ou aide
+if (length(listArgs)==1) {
+  if (length(listArgs[[1]])==0) {
+    source("./Scripts/help/colorisation_help.R")
+    quit()
+  } else if (listArgs[[1]] %in% c("", "-h", "--help")) {
+    source("./Scripts/help/colorisation_help.R")
+    quit()
+  }
+}
+
+cat("\n--- Lecture des arguments\n")
 command <- ""
 arguments <- function(command, argument, listArgs){
   if (command=="f") {
