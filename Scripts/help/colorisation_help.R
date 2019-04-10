@@ -6,7 +6,7 @@
 colorisation_help <- function() {
 cat("Usage:
   $colorisation.R [-f <file>] [-option MOTIF]
-Look for MOTIF in headers of <file> and apply the adequat colorisation
+Look for MOTIF in headers of <file> and apply the appropriate colorisation
 
 Options:
   -r  ratio as regular expression
