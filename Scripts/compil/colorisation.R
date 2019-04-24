@@ -1,46 +1,23 @@
 #!/usr/bin/env Rscript
 # @ags-1345-209:PRODUCTION$ ./AnaDiff_IRHS/Scripts/compil/colorisation.R -f ./DataTest/RNAseq_seb/compil.txt -m BH_* -p pval_* -r *_logFC
+# setwd("~/Documents/AnaDiff_IRHS") # Mac
+
 source("./Scripts/src/conf.R")
 source("./Scripts/compil/colorFunctions.R")
+source("./Scripts/src/colorisation_args.R")
+source("./Scripts/src/readArgs.R")
 
 # Liste des arguments (fichier et entêtes de colonnes)
 listArgs <- list("arguments" = commandArgs(trailingOnly=TRUE))
-# Vérification non nul ou aide
-if (length(listArgs)==1) {
-  if (length(listArgs[[1]])==0) {
-    source("./Scripts/help/colorisation_help.R")
-    quit()
-  } else if (listArgs[[1]] %in% c("", "-h", "--help")) {
-    source("./Scripts/help/colorisation_help.R")
-    quit()
-  }
-}
+listArgs <- list("arguments" = c(
+  "-f", "../Compil/RNAseq/result_anaDiff_compil.txt",
+  "-r", "*_FC",
+  "-p", "*_pval",
+  "-b", "*_BH"))
 
-cat("\n--- Lecture des arguments\n")
-command <- ""
-arguments <- function(command, argument, listArgs){
-  if (command=="f") {
-    listArgs$file2color <- argument
-  } else if (command=="i") {
-    listArgs$intensity <- argument
-  } else if (command=="r") {
-    listArgs$ratio <- argument
-  } else if (command=="p") {
-    listArgs$pval <- argument
-  } else if (command=="b") {
-    listArgs$bh <- argument
-  }
-  return(listArgs)
-}
-
-for (argument in listArgs[[1]]) {
-  listArgs <- arguments(command, argument, listArgs)
-  if (substr(argument,1,1)=="-") {
-    command <- substr(argument,2,2)
-  } else {
-    command <- ""
-  }
-}
+listArgs <- .readArgs(listArgs,
+                      "./Scripts/help/colorisation_help.R",
+                      "./Scripts/src/colorisation_args.R")
 print(listArgs)
 
 # Lecture du fichier
@@ -54,45 +31,34 @@ cat("\nEntêtes des colonnes :")
 cat(paste("\n  ", colnames(tab)))
 cat("\n")
 
-# transformation du tableau
-typeOfColor <- function(listArgs, ent) {
-  for (i in listArgs[3:length(listArgs)]) {
-    if (length(grep(i, ent)==1)) {return(names(which(listArgs[3:length(listArgs)]==i)))}
-  }
-}
-
-matColor <- matrix(nrow=nbrow+3, ncol=1)
-matColor[1,1] <- "<table>"
-matColor[2,1] <- "<tr></tr>"
-matColor[3:(nrow(matColor)-1),1] <- "<tr>"
-matColor[nrow(matColor),1] <- "</table>"
-temp <- matColor[3:(nrow(matColor)-1),1]
+.matColor <- matrix(nrow=nbrow+3, ncol=1)
+.matColor[1,1] <- "<table>"
+.matColor[2,1] <- "<tr></tr>"
+.matColor[3:(nrow(.matColor)-1),1] <- "<tr>"
+.matColor[nrow(.matColor),1] <- "</table>"
+temp <- .matColor[3:(nrow(.matColor)-1),1]
 
 for (i in seq(1:ncol(tab))){
   data <- list("ent"=colnames(tab)[i], val=list(tab[,i])[[1]])
-  toc <- typeOfColor(listArgs, data$ent)
+  toc <- .typeOfColor(listArgs, data$ent)
   if (is.null(toc)) {
     temp <- paste(temp, "<td></td>", sep="")
-  } else if (toc=="ratio") {
-    val <- sapply(data$val, .transformRat)
-    val <- sapply(val, .htmlTag)
-    temp <- paste(temp, val, sep="")
-  } else if (toc=="pval") {
-    val <- sapply(data$val, .transformPval)
-    val <- sapply(val, .htmlTag)
-    temp <- paste(temp, val, sep="")
-  } else if (toc=="bh") {
-    val <- sapply(data$val, .transformBh)
-    val <- sapply(val, .htmlTag)
-    temp <- paste(temp, val, sep="")
-  } else if (toc=="intensity") {
-    val <- sapply(data$val, .transformInt)
+  } else {
+    if (toc=="ratio") {
+      val <- sapply(data$val, .transformRat)
+    } else if (toc=="pval") {
+      val <- sapply(data$val, .transformPval)
+    } else if (toc=="bh") {
+      val <- sapply(data$val, .transformBh)
+    } else if (toc=="intensity") {
+      val <- sapply(data$val, .transformInt)
+    }
     val <- sapply(val, .htmlTag)
     temp <- paste(temp, val, sep="")
   }
 }
-temp <- paste(temp, "</tr>", sep="")
-matColor[3:(nrow(matColor)-1),1] <- temp
+.matColor[3:(nrow(.matColor)-1),1] <- paste(temp, "</tr>", sep="")
+rm(i, toc, val, temp, nbcol, nbrow, data, tab)
 
-fileName <- paste(tools::file_path_sans_ext(listArgs$file2color), ".html", sep="")
-write.table(matColor, fileName, row.names=F, col.names=F, quote=F)
+outFileName <- paste(tools::file_path_sans_ext(listArgs$file2color), ".html", sep="")
+write.table(.matColor, outFileName, row.names=F, col.names=F, quote=F)

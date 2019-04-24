@@ -7,8 +7,8 @@
   return(list(bleue=paletteBleue, jaune=paletteJaune, verte=paletteVerte, rouge=paletteRouge, noire=paletteNoire))
 }
 .transformBh <- function(bh,
-                         gammeBleue=.gammeCouleurs()$bleue,
-                         valeurZero=.gammeCouleurs()$noire) {
+                         gammeBleue=c("#0000FF", "#2852FC", "#50A5FA", "#79F8F8"),
+                         valeurZero="#000000") {
   if      (is.na(bh))    {cBh <- "#5E5E5E"}
   else if (bh < 0.00001) {cBh <- gammeBleue[4]}
   else if (bh < 0.01)    {cBh <- gammeBleue[3]}
@@ -18,8 +18,9 @@
   return(cBh)
 }
 .transformInt <- function(int,
-                          gammeJaune=.gammeCouleurs()$jaune,
-                          valeurZero=.gammeCouleurs()$noire) {
+                          gammeJaune=c("#3A3A00", "#6E6E00", "#A2A200", "#C9C900",
+                                       "#D5D500", "#E1E100", "#ECEC19", "#F5F53F", "#FFFF66"),
+                          valeurZero="#000000") {
   if (is.na(int)) {cInt <- "#5E5E5E"}
   else {
     int <- round(int)
@@ -30,8 +31,8 @@
   return(cInt)
 }
 .transformPval <- function(pval,
-                           gammeBleue=.gammeCouleurs()$bleue,
-                           valeurZero=.gammeCouleurs()$noire) {
+                           gammeBleue=c("#0000FF", "#2852FC", "#50A5FA", "#79F8F8"),
+                           valeurZero="#000000") {
   if      (is.na(pval))    {cPval <- "#5E5E5E"}
   else if (pval < 0.00001) {cPval <- gammeBleue[4]}
   else if (pval < 0.001)   {cPval <- gammeBleue[3]}

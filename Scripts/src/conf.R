@@ -9,14 +9,14 @@
 
 # Configuration
 # Chemin fonction des ordinateurs
-etc <- list("/etc/anadiff.conf",
+.etc <- list("/etc/anadiff.conf",
      "/usr/local/etc/anadiff.conf",
      "~/etc/anadiff.conf",
      "~/.local/etc/anadiff.conf")
-conf <- FALSE
-for (e in etc) {
-  if (file.exists(e)) {
-    source(e)
-    conf <- TRUE
+.conf <- FALSE
+for (.e in .etc) {
+  if (file.exists(.e)) {
+    source(.e)
+    .conf <- TRUE
   }
 }
