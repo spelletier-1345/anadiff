@@ -6,6 +6,12 @@
 #
 ###############################################
 
+# En console :
+# cd /home/spelletier/Documents/Projets/anadiff/Scripts/array/
+# make
+# Rscript ./array_dataTest.R
+
+
 # Dossier de travail
 conf <- c()
 conf$pck <- c("limma", "httr", "jsonlite")
@@ -27,3 +33,6 @@ data$dec <- "."
 
 adresse = "/home/spelletier/Documents/Projets/anadiff/Data/"
 # adresse = "http://147.99.112.52/rscripts/Tools/Agilent/"
+
+source('/home/spelletier/Documents/Projets/anadiff/Scripts/array/make_anaDiff_Agilent_20190626.R')
+anaDiffAgilent(designPuce = data$designPuce, labelling = data$labelling)
