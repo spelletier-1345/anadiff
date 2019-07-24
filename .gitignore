@@ -7,3 +7,5 @@
 .Rproj.user
 /Scripts/compil/*.Rproj
 *make_anaDiff_*
+anadiff.Rproj
+*.Rproj

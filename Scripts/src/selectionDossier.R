@@ -3,17 +3,17 @@
 # Le 9 janvier 2019 - Sandra PELLETIER
 ###############################################
 
-.selectionDossier <- function(inviteDossier=NULL, dataTest=conf$dataTest) {
-  if (!is.null(dataTest)) {print("selectionDossier")} else {inviteDossier=TRUE}
-  if (is.null(inviteDossier)) {
-    fileArray <- conf$dataTest
-} else {
-    cat(inviteDossier)
+.selectionDossier <- function(conf, inviteDossier=TRUE) {
+  if (conf$dataTest) {print("selectionDossier")} else {inviteDossier=FALSE}
+  if (inviteDossier) {
+    fileArray <- conf$dataFolder
+  } else {
+    cat(conf$message)
     readLines(n=1)
     e <- simpleError("Oups")
     fileArray <- tryCatch(file.choose(), error=function(e) e)
     if (class(fileArray)!="character") {
-      return("file.choose() : choix de fichier annule")
+      return("file.choose() : opening of the folder canceled")
       stop(call.=F)
     }
   }
@@ -23,5 +23,6 @@
     cat("Dossier de travail :\n",dataFolder,"\n\n",sep="")
   }
   fileArray <- basename(fileArray)
+  
   return(list(dataFolder,fileArray))
 }

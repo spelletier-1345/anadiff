@@ -8,8 +8,8 @@
 ###############################################
 
 # Configuration
-.conf <- function(dataTest){
-  conf <- c()
+.conf <- function(conf){
+  if (is.null(conf)) {conf <- c()}
   conf$localOpt <- options() ; options(warn=-1)
   conf$version <- "AnaDiff_Script_functions_v5.0.R"
   conf$pck <- c("limma", "httr", "jsonlite")
@@ -17,4 +17,5 @@
   ------------ MESSAGE -------------
   Press \"Entree\" and select the file describing your experiences (arrays.txt)
   The \".txt \" raw data files must be in this same folder \n\n "
+  return(conf)
 }
