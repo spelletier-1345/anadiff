@@ -8,15 +8,14 @@
 ###############################################
 
 # Configuration
-# Chemin fonction des ordinateurs
-.etc <- list("/etc/anadiff.conf",
-     "/usr/local/etc/anadiff.conf",
-     "~/etc/anadiff.conf",
-     "~/.local/etc/anadiff.conf")
-.conf <- FALSE
-for (.e in .etc) {
-  if (file.exists(.e)) {
-    source(.e)
-    .conf <- TRUE
-  }
+.conf <- function(conf){
+  if (is.null(conf)) {conf <- c()}
+  conf$localOpt <- options() ; options(warn=-1)
+  conf$version <- "AnaDiff_Script_functions_v5.0.R"
+  conf$pck <- c("limma", "httr", "jsonlite")
+  conf$message <- "Selection of the working directory ... \n
+  ------------ MESSAGE -------------
+  Press \"Entree\" and select the file describing your experiences (arrays.txt)
+  The \".txt \" raw data files must be in this same folder \n\n "
+  return(conf)
 }

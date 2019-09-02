@@ -1,0 +1,160 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml"><head><title>R: Differential analysis for Agilent array</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<link rel="stylesheet" type="text/css" href="R.css" />
+</head><body>
+
+<table width="100%" summary="page for anaDiff_Agilent {tools}"><tr><td>anaDiff_Agilent {tools}</td><td style="text-align: right;">R Documentation</td></tr></table>
+
+<h2>Differential analysis for Agilent array</h2>
+
+<h3>Description</h3>
+
+<p>Comparison analysis using limma.
+</p>
+<p>This fonction read the summary file and execute the several comparison of it.
+Library used are limma, httr and jsonlite.
+</p>
+
+
+<h3>Usage</h3>
+
+<pre>
+anaDiff_Agilent(designPuce)
+</pre>
+
+
+<h3>Arguments</h3>
+
+<table summary="R argblock">
+<tr valign="top"><td><code>designPuce</code></td>
+<td>
+<p>character or integer. The Agilent number of the design</p>
+</td></tr>
+<tr valign="top"><td><code>labelling</code></td>
+<td>
+<p>character. The default is &quot;direct&quot; for a direct labelling of target.
+For an indirect labelling, use &quot;indirect&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>popBH</code></td>
+<td>
+<p>character. The default is &quot;alternate&quot; : For the BH calculation, all the 
+probe non expressed and non differentiel will exclude. The other choice is &quot;complete&quot;
+for the BH calculation on all the probes.</p>
+</td></tr>
+<tr valign="top"><td><code>statBH</code></td>
+<td>
+<p>character. The default is &quot;BH&quot;. Other choice are &quot;Bonferroni&quot;, 
+&quot;Bonferroni.with.m0&quot; and &quot;qvalue&quot;.</p>
+</td></tr>
+<tr valign="top"><td><code>bkgCalculation</code></td>
+<td>
+<p>logical. Default is TRUE. For calculation and substraction of
+the background. For the background calculation, a subset of the 10 percent less expressed
+probes is used for mean and standard deviation. The background is this mean plus twice
+standard deviation.</p>
+</td></tr>
+<tr valign="top"><td><code>plot</code></td>
+<td>
+<p>logical. Default is TRUE, for generate the png quality plot.</p>
+</td></tr>
+<tr valign="top"><td><code>adresse</code></td>
+<td>
+<p>character. 
+The default is &quot;http://pegasus-bioinfo.angers-nantes.inra.fr/rscripts/Tools/Agilent/&quot;,
+used for the specification of the design and the read of annotations file.</p>
+</td></tr>
+<tr valign="top"><td><code>dataTest</code></td>
+<td>
+<p>logical. Default is FALSE.</p>
+</td></tr>
+<tr valign="top"><td><code>dec</code></td>
+<td>
+<p>character. Default is &quot;.&quot; as decimal separator.</p>
+</td></tr>
+</table>
+
+
+<h3>Value</h3>
+
+<p>Summary of quality appreciations. Files are wrote on a new directory using the
+summary file name.
+</p>
+
+
+<h3>Prerequisites and summary file</h3>
+
+<p>The summary file must be in the same directory than raw data. It is a tabular text 
+file with 7 columns and one line by array.
+</p>
+
+
+<h4>FileName</h4>
+
+<p>The summary file name of the array with the barcode of the slide and the position of the 
+array on the slide. ei: 258455010001_1_1
+</p>
+
+
+
+<h4>Cy3</h4>
+
+<p>Name of the Cy3 sample. ei: NaCl_repet1
+</p>
+
+
+
+<h4>Cy5</h4>
+
+<p>Name of the Cy5 sample. ei. H2O_2
+</p>
+
+
+
+<h4>Control</h4>
+
+<p>3 or 5: the dye of the control sample (denominator for comparison)
+</p>
+
+
+
+<h4>Swaps</h4>
+
+<p>Name of the comparison. Must be the same for all the array (line) composing the 
+comparison. ei: NaCl_vs_H2O
+</p>
+
+
+
+<h4>CtrName</h4>
+
+<p>Name of the control sample (denominator) after compilation (mean) of biological or 
+thechnical repets.
+</p>
+
+
+
+<h4>TtmtName</h4>
+
+<p>Name of the treated sample (numerator) after compilation (mean) of biological or 
+thechnical repets.
+</p>
+
+
+
+<h3>Note</h3>
+
+<p>For more explanation or problems, please contact the IRHS BIDeFI team : 
+contact-bioinfo-irhs@inra.fr
+</p>
+
+
+<h3>Examples</h3>
+
+<pre>
+anaDiff_Agilent(85550)
+anaDiff_Agilent("85550")
+anaDiff_Agilent("85550", labelling = "indirect", statBH = "Bonferroni")
+</pre>
+
+<hr /><div style="text-align: center;">[Package <em>tools</em> version 3.4.4 ]</div>
+</body></html>

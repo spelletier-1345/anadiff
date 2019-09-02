@@ -1,0 +1,46 @@
+.anaDiffRNAseq
+.countTable
+.createColorTable
+.defineComparisons
+.edgeRTable
+.functionDESeq2
+.functionEdgeR
+.gammeBH
+.gammeInt
+.gammePval
+.gammeRatio
+.mkdirAnaDiff
+.mkfileOut
+.readSummary
+.selectionFolder
+.verifPackages
+.writeLineOut
+anaDiff_RNAseq
+count2rpkm
+xlsTransform
+
+>> Commun avac Agilent
+.verifPackages
+.writeLineOut
+
+>> Ambiguité
+.gammeBH
+.gammeInt
+.gammePval
+.gammeRatio
+.mkdirAnaDiff
+.mkfileOut
+.selectionFolder
+
+>> uniquement pour rnaseq
+.anaDiffRNAseq
+.countTable
+.createColorTable
+.defineComparisons
+.edgeRTable
+.functionDESeq2
+.functionEdgeR
+.readSummary
+anaDiff_RNAseq
+count2rpkm
+xlsTransform
