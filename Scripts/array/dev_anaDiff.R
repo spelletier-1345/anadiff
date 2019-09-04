@@ -22,5 +22,5 @@ make_anaDiff <- sort(list.files(path = "./Scripts/",
 
 ### Source de la fonction
 source(make_anaDiff)
-
+rm(make_anaDiff)
 ### 
