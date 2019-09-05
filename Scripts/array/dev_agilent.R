@@ -18,9 +18,7 @@ rm(list=ls(all.names = TRUE))
 ### Dossier de travail
 setwd("/home/spelletier/Documents/Projets/anadiff/")
 ### Source des fonctions
-listFiles <- list.files(path = "Scripts/src/", pattern = (".R$"))
-for (files in listFiles) {source(paste("Scripts/src/", files, sep = ""))}
-rm(files, listFiles)
+source("Scripts/array/dev_anaDiff.R")
 ls(all.names = TRUE)
 
 ### conf dataTest

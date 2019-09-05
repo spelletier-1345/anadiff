@@ -14,7 +14,6 @@ rm(list=ls(all.names = TRUE))
 setwd("/home/spelletier/Documents/Projets/anadiff/")
 
 ### Recherche du dernier make_anaDiff
-list.files(path = "./Scripts/", pattern = "make_anaDiff_*.R")
 make_anaDiff <- sort(list.files(path = "./Scripts/",
                                 pattern = "make_anaDiff_",
                                 full.names = TRUE),
