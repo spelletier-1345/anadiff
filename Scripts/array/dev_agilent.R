@@ -18,9 +18,7 @@ rm(list=ls(all.names = TRUE))
 ### Dossier de travail
 setwd("/home/spelletier/Documents/Projets/anadiff/")
 ### Source des fonctions
-listFiles <- list.files(path = "Scripts/src/", pattern = (".R$"))
-for (files in listFiles) {source(paste("Scripts/src/", files, sep = ""))}
-rm(files, listFiles)
+source("Scripts/array/dev_anaDiff.R")
 ls(all.names = TRUE)
 
 ### conf dataTest
@@ -30,7 +28,7 @@ designPuce <- "84550"
 
 conf <- c()
 conf$designPuce <- "84550"
-conf$adresse <- "/home/spelletier/Documents/Projets/anadiff/Data/Agilent"
+conf$adresse <- "/home/spelletier/Documents/Projets/anadiff/Data/Agilent/"
 conf$verifPackage <- .verifPackages(conf$pck)!=0
 # conf$dataTest <- dataTest
 conf$dataFolder <- "/home/spelletier/Documents/Projets/anadiff/Data/anaDiff_Agilent/summary.txt"

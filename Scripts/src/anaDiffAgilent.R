@@ -12,7 +12,6 @@ anaDiff_Agilent <- function(
   bkgCalculation = TRUE,
   plot = TRUE,
   adresse = "http://pegasus-bioinfo.angers-nantes.inra.fr/rscripts/Tools/Agilent/",
-  dataTest = FALSE,
   dec = "."
 ) {
   #####
@@ -87,12 +86,7 @@ anaDiff_Agilent <- function(
   
   ##### 1- data configuration #####
   cat("Check START\n")
-  if (designPuce=="dataTest") {
-    cat("\n");cat(">>> dataTest\n")
-    dataTest <- TRUE
-    # source("./Scripts/array/array_dataTest.R")
-  }
-  if(!dataTest){
+  if(!exists("dataTest")){
     conf <- .conf(NULL)
     conf$designPuce <- designPuce
     conf$adresse <- adresse

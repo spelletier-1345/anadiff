@@ -1,0 +1,87 @@
+---
+title: "anaDiff Notebook"
+output:
+  html_document:
+    df_print: paged
+    toc: true
+  pdf_document: default
+author: Sandra Pelletier
+---
+
+## Dépôt source
+
+Le projet anaDiff est déposé sur SourceSup : https://sourcesup.renater.fr/projects/anadiff.
+
+## Les fonctions
+
+Les fonctions sont dans le dossier `./Scripts/src/`.  
+Elles sont individuelles, c'est à dire qu'il n'y a qu'une fonction par fichier .R  
+Le nom du fichier reprend le nom de la fonction. Toutefois, si la fonction est cachée (commence par un point, ei : .conf(arg)), le point n'est pas repris dans le nom de fichier.
+
+## Les tests de fonctions
+### Les tests individuels
+
+Les tests sont dans le répertoire `./Scripts/tests`.  
+Un fichier de test est créer pour chaque fonction. Il renseigne 
+
+- des arguments utilisés 
+- des différents comportements éventuels
+- des valeurs retournées 
+
+#### Exemple avec verifPackages
+
+```{bash}
+cat ./Scripts/tests/test_verifPackages.R
+```
+
+
+```{r}
+source("./Scripts/tests/test_verifPackages.R")
+```
+
+### Vérification de l'ensemble des tests
+Un script vérifie l'ensemble des tests. 
+
+- Il récupère la liste des tests présent dans la dossier `./Scripts/tests`
+- Il exécute chaque test
+- Il renvoie le nombre de tests effectués
+- S'il y a des erreurs : 
+    - Il compte le nombre de tests en erreur
+    - Il imprime le nom des tests en erreur
+
+
+```{r warning=FALSE}
+source("./Scripts/tests/verif_tests.R")
+```
+
+## Les fonctionnalités d'anaDiff
+AnaDiff regroupe plusieurs fonctionnalités (arrays, rnaseq, compilation, ...)  
+Chaque fonctionnalité est développée via des scripts dans un sous-répertoire de `./Scripts/`.
+Même s'ils sont transitoire, ils sont sauvegardé via git, et une branche de git est créée avec le même nom.
+
+### array
+
+
+
+## Les makefiles
+Un script make est présent dans chaque répertoire de fonctionnalité.  
+Son utilisation est :
+
+```{bash}
+cd ./Scripts/array/
+make
+```
+Il crée un script R contenant toutes les fonctions de `./Scripts/src/` avec dans le nom la fonctionnalité qui l'a généré au moment du développement.  
+Un script générique final est présent dans le répertoire `./Scripts/`. Il génère un fichier make_anaDiff_<date>.R
+
+## La vérification d'anaDiff avec des données de test
+
+
+
+## Mémo
+_________________________________________________________
+
+> Memo markdown Rstudio
+> 
+> Ajouter un nouveau bloc de code *Ctrl+Alt+I*.  
+> Avoir un apperçu *Ctrl+Shift+K*   

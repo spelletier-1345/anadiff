@@ -18,7 +18,7 @@
       else {
         message <- paste("\nVous devez telecharger le package ", package, "\n",
                          "pour cela, collez les lignes souivantes :\n\nsource(\"http://bioconductor.org/biocLite.R\")\n",
-                         "biocLite(\"", package, "\")\n\n#########################################\n\n", sep="")
+                         "biocLite(\"", package, "\")\n\n", sep="")
         cat(message)
         rm(list=ls(all=T))
       }
