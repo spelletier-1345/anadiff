@@ -1,25 +1,28 @@
-# Fonctionnement de verifPackages
+# Fonctionnement de verifPackages.R
+# .verifPackages(cPackages)
 
-# Données de départ : vPackages
-# sans erreur :
-vPackages_1 <- c("base")
-# avec erreur
-vPackages_2 <- c("baseXXX")
+# Arguments : vPackages
+vPackages_1 <- c("base")    # verifPackages sans erreur
+vPackages_2 <- c("baseXXX") # verifPackages avec erreur
+
+###
+
+source("./Scripts/src/verifPackages.R")
 
 ###
 
 cat(">>> sans erreur : \n")
-t <- .verifPackages(vPackages_1)
+tt <- .verifPackages(vPackages_1)
 cat("return : \n")
-print(t)
+print(tt)
 
 ###
 
 cat("\n>>> avec package 'baseXXX' manquant : \n")
-t <- .verifPackages(vPackages_2)
+tt <- .verifPackages(vPackages_2)
 cat("return : \n")
-print(t)
+print(tt)
 
 ###
 
-rm(vPackages_1, vPackages_2, t)
+rm(vPackages_1, vPackages_2, tt)
