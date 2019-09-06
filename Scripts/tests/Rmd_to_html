@@ -1,0 +1,3 @@
+#!/bin/bash
+R --slave -e 'rmarkdown::render("/home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.Rmd", output_file = "./Scripts/tests/verif_tests.html")'
+firefox file:///home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.html

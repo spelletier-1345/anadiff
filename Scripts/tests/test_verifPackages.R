@@ -7,7 +7,7 @@ vPackages_2 <- c("baseXXX") # verifPackages avec erreur
 
 ###
 
-source("./Scripts/src/verifPackages.R")
+source("../src/verifPackages.R")
 
 ###
 

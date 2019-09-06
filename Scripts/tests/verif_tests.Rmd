@@ -1,0 +1,34 @@
+---
+title: "Tests de vérification des fonctions"
+author: "Sandra Pelletier"
+date: "05/09/2019"
+output: html_document
+---
+
+## Résumé
+
+```{r verif}
+# getwd()
+source("./verif_tests.R")
+```
+
+## Fonctions ddd
+
+### verifPackages
+
+```{r packages}
+source("./test_verifPackages.R")
+```
+
+### conf
+
+```{r conf}
+source("./test_conf.R")
+```
+
+### xxx
+
+```{r test_vide}
+source("./test_.R")
+```
+

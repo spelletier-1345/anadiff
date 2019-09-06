@@ -1,9 +1,9 @@
-tests <- list.files(path = "./Scripts/tests/", pattern = "test_")
+tests <- list.files(path = ".", pattern = "test_")
 ln <- c()
 cpt <- 0
 for (test in tests) {
-  sink("./Scripts/tests/out_verif_tests.R")
-  test <- paste("./Scripts/tests/", test, sep = "")
+  sink("./out_verif_tests.R")
+  test <- paste("./", test, sep = "")
   res <- try(expr = source(test), silent = TRUE)
   sink(NULL)
   if(class(res)=="try-error") {
@@ -18,7 +18,7 @@ if (cpt!=0) {
 } else {
   cat(paste("pas de test en erreur\n"))
 }
-if (file.exists("./Scripts/tests/out_verif_tests.R")) {
-  file.remove("./Scripts/tests/out_verif_tests.R")
+if (file.exists("./out_verif_tests.R")) {
+  file.remove("./out_verif_tests.R")
 }
 rm(ln, cpt, tests, test, res)

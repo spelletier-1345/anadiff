@@ -4,8 +4,8 @@ output:
   html_document:
     df_print: paged
     toc: true
-  pdf_document: default
 author: Sandra Pelletier
+date: "`r format(Sys.time(), '%d %B %Y')`"
 ---
 
 ## Dépôt source
@@ -49,10 +49,11 @@ Un script vérifie l'ensemble des tests.
     - Il compte le nombre de tests en erreur
     - Il imprime le nom des tests en erreur
 
-
-```{r warning=FALSE}
+```{r eval=FALSE}
 source("./Scripts/tests/verif_tests.R")
 ```
+
+Ce script est utilisé par un exécutable `Rmd_to_html`
 
 ## Les fonctionnalités d'anaDiff
 AnaDiff regroupe plusieurs fonctionnalités (arrays, rnaseq, compilation, ...)  
@@ -78,6 +79,8 @@ Un script générique final est présent dans le répertoire `./Scripts/`. Il g�
 
 
 
+## Automatisation de la conversion du .Rmd en .html
+L'automatisation de la conversion d'un document .Rmd en .html peut se faire en ligne de commande 
 ## Mémo
 _________________________________________________________
 

@@ -7,7 +7,7 @@ conf2 <-c(designPuce = "84550")
 
 ###
 
-source("./Scripts/src/conf.R")
+source("../src/conf.R")
 
 ###
 

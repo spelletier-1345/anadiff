@@ -6,6 +6,10 @@ arg <- NULL
 
 ###
 
+source("../src/verifPackages.R")
+print(.verifPackages)
+###
+
 cat(">>> arg : \n")
 
 ###
