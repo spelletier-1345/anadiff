@@ -1,3 +1,21 @@
 #!/bin/bash
-R --slave -e 'rmarkdown::render("/home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.Rmd", output_file = "./Scripts/tests/verif_tests.html")'
-firefox file:///home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.html
+
+# Fichier à tester et chemin
+SBJ_TITL='verif_tests'
+SBJ_PATH='/Scripts/tests/'
+
+# Conf Rmd et html
+IN=$(pwd)$SBJ_PATH$SBJ_TITL'.Rmd'
+OUT=$(date +"%y-%m-%d")'_'$SBJ_TITL'.html'
+
+# Commande NE MARCHE PAS
+# R --slave -e 'rmarkdown::render("$IN", output_file = "$OUT")'
+
+# Commande NE MARCHE PAS
+# CMD="'rmarkdown::render(\""$IN"\", output_file = \""$OUT"\")'"
+# R --slave -e $CMD
+
+# Commande
+R --slave -e 'rmarkdown::render("/home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.Rmd", output_file = "verif_tests.html")'
+
+# firefox file:///home/spelletier/mnt/irhs001_projects/projets_collaboratifs/ANADIFF/PRODUCTION/AnaDiff_IRHS/Scripts/tests/verif_tests.html

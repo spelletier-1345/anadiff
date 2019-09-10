@@ -1,7 +1,7 @@
 ---
-title: "Tests de vérification des fonctions"
+title: "Tests de vérification des fonctions d'anaDiff"
 author: "Sandra Pelletier"
-date: "05/09/2019"
+date: "`r format(Sys.time(), '%d %B %Y - %X')`"
 output: html_document
 ---
 
@@ -12,7 +12,7 @@ output: html_document
 source("./verif_tests.R")
 ```
 
-## Fonctions ddd
+## Fonctions
 
 ### verifPackages
 
@@ -31,4 +31,3 @@ source("./test_conf.R")
 ```{r test_vide}
 source("./test_.R")
 ```
-

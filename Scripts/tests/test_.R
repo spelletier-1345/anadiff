@@ -1,13 +1,14 @@
 # Fonctionnement de function.R
 # .function(args)
 
-# arguments : 
+# arguments :
 arg <- NULL
 
 ###
 
 source("../src/verifPackages.R")
-print(.verifPackages)
+# print(.verifPackages)
+
 ###
 
 cat(">>> arg : \n")
