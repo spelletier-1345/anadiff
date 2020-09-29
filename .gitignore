@@ -1,11 +1,9 @@
 *.RData
 *.Rhistory
-*.Rproj.user
-/Scripts/Agilent_dev.Rproj
-/Scripts/anaDiff.Rproj
-/Data
-.Rproj.user
-/Scripts/compil/*.Rproj
+*.Rproj*
 *make_anaDiff_*
-anadiff.Rproj
-*.Rproj
+/data
+/doc
+/scripts/tests
+*[Pp]egasus*
+
