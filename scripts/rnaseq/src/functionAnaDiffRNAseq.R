@@ -31,6 +31,7 @@ source("./src/functionDEseq2.R")
     myCompare  <- myData[myData$Comparison==comparison,] # Sous tableau de comparaison
     nameFiles  <- as.vector(myCompare$File)
     countTable <- .countTable(nameFiles)
+    countTable <- countTable[,names(countTable)[order(myCompare$Group, decreasing = T)]]
     repet      <- c(sum(myCompare$Group==("Control")),sum(myCompare$Group==("Ttmt")))
     group      <- factor(myCompare$Name[order(myCompare$Group)])
     cat(paste("Control : ",group[1]),"\n")
