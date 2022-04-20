@@ -1,6 +1,6 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/writeLineOut.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/edgeRTable.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/createColorTable.R")
+source("./src/writeLineOut.R")
+source("./src/edgeRTable.R")
+source("./src/createColorTable.R")
 
 .functionEdgeR <- function(repet, countTable, group, comparison, fileOut, pathResults) {
 

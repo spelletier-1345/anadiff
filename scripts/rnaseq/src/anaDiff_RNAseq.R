@@ -1,6 +1,9 @@
 # AnaDiff_RNAseq.R
 # Script d'entrée
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/functionAnaDiffRNAseq.R")
+# Mise à jour le 20-04-2022
+# Auteure : Sandra PELLETIER - BIDefI team - IRHS unit
+
+source("./src/functionAnaDiffRNAseq.R")
 
 anaDiff_RNAseq <- function() {
   R.home()

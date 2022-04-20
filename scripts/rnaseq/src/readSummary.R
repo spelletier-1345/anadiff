@@ -1,4 +1,4 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/writeLineOut.R")
+source("./src/writeLineOut.R")
 
 .readSummary <- function(fileSummary, fileOut, pathFolder) {
   # Ouverture et modif du fichier arrays.txt

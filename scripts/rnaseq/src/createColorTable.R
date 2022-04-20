@@ -1,7 +1,7 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/gammeRatio.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/gammeInt.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/gammePval.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/gammeBH.R")
+source("./src/gammeRatio.R")
+source("./src/gammeInt.R")
+source("./src/gammePval.R")
+source("./src/gammeBH.R")
 
 .createColorTable <- function(tab, pathResults, comparison, fileHTML) {
   # Mise en forme des donnees

@@ -1,4 +1,4 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/selectionFolder.R")
+source("./src/selectionFolder.R")
 xlsTransform <- function() {
   localOpt <- options() ; options(warn=-1)
   cat("Selection du repertoire de travail...\n")

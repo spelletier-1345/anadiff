@@ -1,4 +1,4 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/writeLineOut.R")
+source("./src/writeLineOut.R")
 
 .mkfileOut <- function(dirName) {
   # Cree le fichier out dans le dossier dirName

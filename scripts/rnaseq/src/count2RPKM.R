@@ -1,4 +1,4 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/selectionFolder.R")
+source("./src/selectionFolder.R")
 count2rpkm <- function(countCol, lengthCol, header=F) {
   localOpt <- options()
   options(warn=-1)

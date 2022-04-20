@@ -1,5 +1,5 @@
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/writeLineOut.R")
-source("/home/spelletier/dev/RNAseq/Scripts/AnaDiffRNAseq/src/createColorTable.R")
+source("./src/writeLineOut.R")
+source("./src/createColorTable.R")
 
 .functionDESeq2 <- function(myCompare, countTable, comparison, fileOut, pathResults) {
   rownames(myCompare) <- myCompare$File
