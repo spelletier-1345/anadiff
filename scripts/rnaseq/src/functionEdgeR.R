@@ -14,7 +14,7 @@ source("./src/createColorTable.R")
     y  <- calcNormFactors(y)                      # Calculate normalization factors to scale the raw library sizes.
     y  <- estimateCommonDisp(y)                   # Maximizes the negative binomial conditional common likelihood to give the estimate of the common dispersion across all tags.
     y  <- estimateTagwiseDisp(y)                  # Estimates tagwise dispersion values by an empirical Bayes method based on weighted conditional maximum likelihood.
-    et <- exactTest(y, pair=c(as.vector(group)[1],as.vector(group)[length(group)]))   # Compute genewise exact tests for differences in the means between two groups of negative-binomially distributed counts.
+    et <- exactTest(y, pair=c(as.vector(group)[length(group)],as.vector(group)[1]))   # Compute genewise exact tests for differences in the means between two groups of negative-binomially distributed counts.
     de <- decideTestsDGE(et, p=0.05, adjust="BH") #Classify a series of related differential expression statistics as up, down or not significant.
     cat(paste("common dispersion :",round(y$common.dispersion,digits=3),"\n"))
     .writeLineOut(paste("common dispersion with edgR :",round(y$common.dispersion,digits=3),"\n"), fileOut)
@@ -36,34 +36,69 @@ source("./src/createColorTable.R")
   write.table(edgeRTab, paste(pathResults,comparison,"_edgeR.txt",sep=""),sep="\t",row.names=F,quote=F, dec=".")
 
   # Resume
+  .writeLineOut(paste("\n### edgeR analysis summary ###\n"), fileOut)
+  cat(paste("\nedgeR analysis summary\n\n"))
+  
   pval     <- sum(edgeRTab$PValue_edgeR < 0.05, na.rm=TRUE )
-  BH       <- sum(edgeRTab$FDR_edgeR < 0.1, na.rm=TRUE )
   downpval <- nrow(edgeRTab[which(edgeRTab$logFC<0 & edgeRTab$PValue_edgeR<(0.05)),])
   uppval   <- nrow(edgeRTab[which(edgeRTab$logFC>0 & edgeRTab$PValue_edgeR<(0.05)),])
-  downBH   <- nrow(edgeRTab[which(edgeRTab$logFC<0 & edgeRTab$FDR_edgeR<(0.1)),])
-  upBH     <- nrow(edgeRTab[which(edgeRTab$logFC>0 & edgeRTab$FDR_edgeR<(0.1)),])
   noDEpval <- nrow(edgeRTab) - (downpval+uppval)
-  noDEBH   <- nrow(edgeRTab) - (downBH+upBH)
-  .writeLineOut(paste("\n### edgeR analysis summary ###\n"), fileOut)
+  
   .writeLineOut(paste("number of genes with pval less than 5% :",pval), fileOut)
   .writeLineOut(paste("genes down with pval 5%                :",downpval), fileOut)
   .writeLineOut(paste("genes up with pval 5%                  :",uppval), fileOut)
-  .writeLineOut(paste("number of genes no diff with pval      :",noDEpval,"\n"), fileOut)
-  .writeLineOut(paste("number of genes with BH less than 10%  :",BH), fileOut)
-  .writeLineOut(paste("genes down with BH 10%                 :",downBH), fileOut)
-  .writeLineOut(paste("genes up with BH 10%                   :",upBH), fileOut)
-  .writeLineOut(paste("number of genes no diff with BH        :",noDEBH,"\n"), fileOut)
-
-  cat(paste("\nedgeR analysis summary\n\n"))
+  .writeLineOut(paste("number of genes no diff with pval 5%   :",noDEpval,"\n"), fileOut)
+  
   cat(paste("number of genes with pval less than 5% :",pval,"\n"))
   cat(paste("genes down with pval 5%                :",downpval,"\n"))
   cat(paste("genes up with pval 5%                  :",uppval,"\n"))
-  cat(paste("number of genes no diff with pval      :",noDEpval,"\n\n"))
-  cat(paste("number of genes with BH less than 10%  :",BH,"\n"))
-  cat(paste("genes down with BH 10%                 :",downBH,"\n"))
-  cat(paste("genes up with BH 10%                   :",upBH,"\n"))
-  cat(paste("number of genes no diff with BH        :",noDEBH,"\n\n"))
+  cat(paste("number of genes no diff with pval 5%   :",noDEpval,"\n\n"))
+  
+  pval     <- sum(edgeRTab$PValue_edgeR < 0.01, na.rm=TRUE )
+  downpval <- nrow(edgeRTab[which(edgeRTab$logFC<0 & edgeRTab$PValue_edgeR<(0.01)),])
+  uppval   <- nrow(edgeRTab[which(edgeRTab$logFC>0 & edgeRTab$PValue_edgeR<(0.01)),])
+  noDEpval <- nrow(edgeRTab) - (downpval+uppval)
 
+  .writeLineOut(paste("number of genes with pval less than 1% :",pval), fileOut)
+  .writeLineOut(paste("genes down with pval 1%                :",downpval), fileOut)
+  .writeLineOut(paste("genes up with pval 1%                  :",uppval), fileOut)
+  .writeLineOut(paste("number of genes no diff with pval 1%   :",noDEpval,"\n"), fileOut)
+  
+  cat(paste("number of genes with pval less than 1% :",pval,"\n"))
+  cat(paste("genes down with pval 1%                :",downpval,"\n"))
+  cat(paste("genes up with pval 1%                  :",uppval,"\n"))
+  cat(paste("number of genes no diff with pval 1%   :",noDEpval,"\n\n"))
+  
+  BH       <- sum(edgeRTab$FDR_edgeR < 0.1, na.rm=TRUE )
+  downBH   <- nrow(edgeRTab[which(edgeRTab$logFC<0 & edgeRTab$FDR_edgeR<(0.1)),])
+  upBH     <- nrow(edgeRTab[which(edgeRTab$logFC>0 & edgeRTab$FDR_edgeR<(0.1)),])
+  noDEBH   <- nrow(edgeRTab) - (downBH+upBH)
+  
+  .writeLineOut(paste("number of genes with FDR less than 10%  :",BH), fileOut)
+  .writeLineOut(paste("genes down with FDR 10%                 :",downBH), fileOut)
+  .writeLineOut(paste("genes up with FDR 10%                   :",upBH), fileOut)
+  .writeLineOut(paste("number of genes no diff with FDR        :",noDEBH,"\n"), fileOut)
+
+  cat(paste("number of genes with FDR less than 10%  :",BH,"\n"))
+  cat(paste("genes down with FDR 10%                 :",downBH,"\n"))
+  cat(paste("genes up with FDR 10%                   :",upBH,"\n"))
+  cat(paste("number of genes no diff with FDR 10%    :",noDEBH,"\n\n"))
+
+  BH       <- sum(edgeRTab$FDR_edgeR < 0.05, na.rm=TRUE )
+  downBH   <- nrow(edgeRTab[which(edgeRTab$logFC<0 & edgeRTab$FDR_edgeR<(0.05)),])
+  upBH     <- nrow(edgeRTab[which(edgeRTab$logFC>0 & edgeRTab$FDR_edgeR<(0.05)),])
+  noDEBH   <- nrow(edgeRTab) - (downBH+upBH)
+  
+  .writeLineOut(paste("number of genes with FDR less than 5%  :",BH), fileOut)
+  .writeLineOut(paste("genes down with FDR 5%                 :",downBH), fileOut)
+  .writeLineOut(paste("genes up with FDR 5%                   :",upBH), fileOut)
+  .writeLineOut(paste("number of genes no diff with FDR 5%    :",noDEBH,"\n"), fileOut)
+  
+  cat(paste("number of genes with FDR less than 5%  :",BH,"\n"))
+  cat(paste("genes down with FDR 5%                 :",downBH,"\n"))
+  cat(paste("genes up with FDR 5%                   :",upBH,"\n"))
+  cat(paste("number of genes no diff with FDR 5%    :",noDEBH,"\n\n"))
+  
   # Mise en forme des donnees
   .createColorTable(edgeRTab, pathResults, comparison, fileHTML = "_edgeR.html")
   return(NULL)
