@@ -1,0 +1,10 @@
+cff-version: 1.1.0
+message: "If you use this software, please cite it as below."
+authors:
+  - family-names: Pelletier
+    given-names: Sandra
+    orcid: https://orcid.org/0000-0001-7582-2939
+title: spelletier-1345/anadiff: pegasus production
+version: v4.3
+date-released: 2022-04-22
+            
