@@ -1,5 +1,8 @@
 # AnaDiff : A tool for differential analysis of microarrays and RNAseq
 
+[![DOI](https://zenodo.org/badge/484014612.svg)](https://zenodo.org/badge/latestdoi/484014612)
+
+
 This set of scripts allows differential analysis of microarrays and RNAseq.
 
 - microarrays:
